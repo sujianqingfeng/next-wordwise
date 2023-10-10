@@ -1,4 +1,9 @@
+import AuthButton from './components/auth-button'
 
-export default function Page(){
-  return <h1>login</h1>
+export default function Page() {
+  return (
+    <div>
+      <AuthButton />
+    </div>
+  )
 }
