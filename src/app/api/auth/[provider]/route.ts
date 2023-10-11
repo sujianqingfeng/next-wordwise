@@ -1,14 +1,17 @@
+import { fetchJsonByPost } from "@/app/utils/fetch"
+import { AuthReq } from "@/app/utils/fetch/types"
+
 export async function GET(
   request: Request,
   { params }: { params: { provider: string } }
 ) {
   const { searchParams } = new URL(request.url)
-  const code = searchParams.get('code')
-  console.log('🚀 ~ file: route.ts:7 ~ code:', code)
+  const code = searchParams.get('code')!
   const provider = params.provider
-  console.log('🚀 ~ file: route.ts:6 ~ slug:', provider)
-  const baseUrl = process.env.SERVER_HOST
-  const res = await fetch(`${baseUrl}/auth`)
-  const data = await res.json()
-  return Response.json({ data })
+
+  const res = await fetchJsonByPost<any,AuthReq>('/auth', {
+    code,
+    provider
+  })
+  return Response.json(res)
 }

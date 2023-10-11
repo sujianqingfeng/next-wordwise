@@ -1,9 +1,17 @@
+import { fetchJsonByGet } from '../utils/fetch'
+import type { AuthProvidersItemResp } from '../utils/fetch/types'
 import AuthButton from './components/auth-button'
 
-export default function Page() {
+export default async function Page() {
+  const providers = await fetchJsonByGet<AuthProvidersItemResp[]>('/auth/providers')
+
   return (
     <div>
-      <AuthButton />
+      {
+        providers.map(p=>{
+          return <AuthButton key={p.provider} {...p} />
+        })
+      }
     </div>
   )
 }
