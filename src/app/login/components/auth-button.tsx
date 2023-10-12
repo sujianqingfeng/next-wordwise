@@ -12,7 +12,7 @@ export default function AuthButton(props: AuthProvidersItemResp) {
   return (
     <button
       onClick={onAuth}
-      className="flex items-center justify-start gap-2 bg-slate-600 p-2 rounded-2"
+      className="flex items-center justify-start gap-2 bg-slate-600 p-2 rounded-md"
     >
       <Image src={google} alt="google" />
       Google Auth

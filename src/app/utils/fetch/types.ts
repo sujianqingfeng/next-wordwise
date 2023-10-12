@@ -3,7 +3,11 @@ export type AuthProvidersItemResp = {
   authUrl: string
 }
 
-export type AuthReq =  {
+export type AuthReq = {
   code: string
   provider: string
+}
+
+export type Token = {
+  token: string
 }
