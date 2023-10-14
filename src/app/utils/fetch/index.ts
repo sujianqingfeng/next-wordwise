@@ -1,20 +1,38 @@
+import { cookies } from 'next/headers'
+
 export async function fetchJson<R = any>(
   url: string,
   opt?: RequestInit
 ): Promise<R> {
   const baseUrl = process.env.SERVER_HOST
-  const res = await fetch(`${baseUrl}${url}`, {
-    ...opt
-  })
 
-  if (!res.ok) {
-    throw new Error('Failed to fetch data')
+  const cookieStore = cookies()
+  const token = cookieStore.get('token')
+
+  const headers: Record<string, any> = {
+    ...opt?.headers
   }
-  const json = await res.json()
-  const { data, code = 0 } = json
+  if (token) {
+    headers.authorization = `Bearer ${token.value}`
+  }
+  try {
+    const res = await fetch(`${baseUrl}${url}`, {
+      cache: 'no-cache',
+      ...opt,
+      headers
+    })
 
-  if (code === 0) {
-    return data
+    if (!res.ok) {
+      throw new Error('Failed to fetch data')
+    }
+    const json = await res.json()
+    const { data, code = 0 } = json
+
+    if (code === 0) {
+      return data
+    }
+  } catch (error) {
+    console.error(error)
   }
 
   throw new Error('data maybe not correct')
@@ -25,8 +43,8 @@ export function fetchJsonByGet<R = any, T extends Record<string, any> = any>(
   data?: T,
   opt?: RequestInit
 ) {
-  // TODO: 未完成
-  return fetchJson<R>(url, opt)
+  const newUrl = `${url}${new URLSearchParams(data).toString()}`
+  return fetchJson<R>(newUrl, opt)
 }
 
 export function fetchJsonByPost<R = any, T extends Record<string, any> = any>(

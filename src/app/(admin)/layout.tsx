@@ -8,7 +8,7 @@ export default function AdminLayout({
 }) {
   return (
     <div className="flex justify-start">
-      <div className="w-[300px] bg-gray-300">
+      <div className="w-[200px] bg-gray-300">
         <header className="p-4 flex justify-center items-center">
           <Logo />
         </header>

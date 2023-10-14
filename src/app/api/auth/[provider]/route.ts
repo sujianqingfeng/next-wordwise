@@ -10,14 +10,10 @@ export async function GET(
   const code = searchParams.get('code')!
   const provider = params.provider
 
-  const res = await fetchJsonByPost<Token, AuthReq>(
-    '/auth',
-    {
-      code,
-      provider
-    },
-    { cache: 'no-cache' }
-  )
+  const res = await fetchJsonByPost<Token, AuthReq>('/auth', {
+    code,
+    provider
+  })
 
   const response = NextResponse.redirect(
     `${request.nextUrl.origin}/dashboard`,
