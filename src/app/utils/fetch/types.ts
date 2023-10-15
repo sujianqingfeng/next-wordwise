@@ -11,3 +11,10 @@ export type AuthReq = {
 export type Token = {
   token: string
 }
+
+export type ProfileResp = {
+  id?: string
+  userId?: string
+  volcanoAccessKeyId: string
+  volcanoSecretKey: string
+}

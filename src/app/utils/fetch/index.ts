@@ -1,22 +1,27 @@
-import { cookies } from 'next/headers'
+import { API_PROXY, SERVER_HOST } from '@/app/constants'
 
 export async function fetchJson<R = any>(
   url: string,
   opt?: RequestInit
 ): Promise<R> {
-  const baseUrl = process.env.SERVER_HOST
-
-  const cookieStore = cookies()
-  const token = cookieStore.get('token')
-
   const headers: Record<string, any> = {
     ...opt?.headers
   }
-  if (token) {
-    headers.authorization = `Bearer ${token.value}`
+
+  let finalUrl = `${SERVER_HOST}${url}`
+  if (typeof document === 'undefined') {
+    const { cookies } = await import('next/headers')
+    const cookieStore = cookies()
+    const token = cookieStore.get('token')
+    if (token) {
+      headers.authorization = `Bearer ${token.value}`
+    }
+  } else {
+    finalUrl = `${API_PROXY}/${url}`
   }
+
   try {
-    const res = await fetch(`${baseUrl}${url}`, {
+    const res = await fetch(finalUrl, {
       cache: 'no-cache',
       ...opt,
       headers
@@ -30,12 +35,12 @@ export async function fetchJson<R = any>(
 
     if (code === 0) {
       return data
+    } else {
+      throw new Error('data maybe not correct')
     }
   } catch (error) {
-    console.error(error)
+    throw error
   }
-
-  throw new Error('data maybe not correct')
 }
 
 export function fetchJsonByGet<R = any, T extends Record<string, any> = any>(
