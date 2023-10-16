@@ -1,20 +1,49 @@
 import { API_PROXY } from '@/app/constants'
 import { useFetch } from '@/app/hooks/use-fetch'
-import { fetchJsonByGet, fetchJsonByPost } from '@/app/utils/fetch'
-import { AuthReq, Token } from '@/app/utils/fetch/types'
-import { NextRequest, NextResponse } from 'next/server'
+import { NextRequest } from 'next/server'
 
-export async function GET(request: NextRequest) {
+function getFinalUrl(request: NextRequest) {
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const { getBaseUrl } = useFetch()
   const pathname = request.nextUrl.pathname
   const url = pathname.replace(API_PROXY + '/', '')
-  const { getBaseUrl, getTokenFromServer } = useFetch()
-  const token = await getTokenFromServer()
-  const res = await fetch(getBaseUrl(url), {
-    headers: {
-      authorization: `Bearer ${token}`
-    }
-  })
-  const json = await res.json()
+  const finalUrl = getBaseUrl(url)
+  return finalUrl
+}
 
+async function getAuthHeaders() {
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const { getTokenFromServer } = useFetch()
+  const token = await getTokenFromServer()
+  return {
+    authorization: `Bearer ${token}`
+  }
+}
+
+export async function f(request: NextRequest, opt?: Partial<RequestInit>) {
+  const finalUrl = getFinalUrl(request)
+  const headers = await getAuthHeaders()
+
+  const mergeHeaders = {
+    ...headers,
+    ...opt?.headers
+  }
+
+  const res = await fetch(finalUrl, { ...opt, headers: mergeHeaders })
+  const json = await res.json()
   return Response.json(json)
+}
+
+export async function GET(request: NextRequest) {
+  return f(request)
+}
+
+export async function POST(request: NextRequest) {
+  return f(request, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+    },
+    body: request.body
+  })
 }
