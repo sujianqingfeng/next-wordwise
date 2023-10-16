@@ -39,11 +39,23 @@ export async function GET(request: NextRequest) {
 }
 
 export async function POST(request: NextRequest) {
+  const body = await request.text()
   return f(request, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded'
     },
-    body: request.body
+    body: body
+  })
+}
+
+export async function PUT(request: NextRequest) {
+  const body = await request.text()
+  return f(request, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+    },
+    body: body
   })
 }

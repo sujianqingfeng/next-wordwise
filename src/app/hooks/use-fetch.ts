@@ -82,10 +82,26 @@ export function useFetch() {
     })
   }
 
+  function fetchJsonByPut<R = any, T extends Record<string, any> = any>(
+    url: string,
+    data?: T,
+    opt?: RequestInit
+  ) {
+    return fetchJson<R>(url, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      body: new URLSearchParams(data),
+      ...opt
+    })
+  }
+
   return {
     getBaseUrl,
     getTokenFromServer,
     fetchJsonByGet,
-    fetchJsonByPost
+    fetchJsonByPost,
+    fetchJsonByPut
   }
 }
