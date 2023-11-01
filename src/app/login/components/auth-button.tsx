@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import google from '../../../../public/icons/google.svg'
-import type { AuthProvidersItemResp } from '@/app/utils/fetch/types'
+import type { AuthProvidersItemResp } from '@/api/types'
 
 export default function AuthButton(props: AuthProvidersItemResp) {
   const onAuth = () => {

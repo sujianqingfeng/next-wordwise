@@ -1,13 +1,11 @@
 import Logo from '@/app/components/logo'
-import { fetchJsonByGet } from '../utils/fetch'
-import type { AuthProvidersItemResp } from '../utils/fetch/types'
 import AuthButton from './components/auth-button'
+import { fetchAuthProvidersApi } from '@/api'
 
 export const dynamic = 'force-dynamic'
 
 export default async function Page() {
-  const providers =
-    await fetchJsonByGet<AuthProvidersItemResp[]>('/auth/providers')
+  const providers = await fetchAuthProvidersApi()
 
   return (
     <>

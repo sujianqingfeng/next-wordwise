@@ -1,5 +1,5 @@
-import { fetchJsonByPost } from '@/app/utils/fetch'
-import { AuthReq, Token } from '@/app/utils/fetch/types'
+import { fetchJsonByPost } from '@/utils/fetch'
+import type { AuthReq, Token } from '@/api/types'
 import { NextRequest, NextResponse } from 'next/server'
 
 export async function GET(
@@ -23,7 +23,7 @@ export async function GET(
   )
   response.headers.set(
     'Set-Cookie',
-    `token=${res.token}; Path=/; HttpOnly; SameSite=Strict;`
+    `token=Bearer ${res.token}; Path=/; HttpOnly; SameSite=Strict;`
   )
   return response
 }

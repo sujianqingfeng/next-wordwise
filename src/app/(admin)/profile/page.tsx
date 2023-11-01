@@ -1,9 +1,10 @@
 'use client'
 
-import { ProfileResp } from '@/app/utils/fetch/types'
+import { ProfileResp } from '@/api/types'
 import { useForm } from 'react-hook-form'
 import { useEffect, useState } from 'react'
 import { useFetch } from '@/app/hooks/use-fetch'
+import { fetchProfileApi } from '@/api'
 
 export default function Page() {
   const [profile, setProfile] = useState<ProfileResp>({
@@ -20,7 +21,7 @@ export default function Page() {
 
   useEffect(() => {
     const fetchProfile = async () => {
-      const profile = await fetchJsonByGet<ProfileResp>('/profile')
+      const profile = await fetchProfileApi()
       console.log('🚀 ~ file: page.tsx:24 ~ fetchProfile ~ profile:', profile)
       setProfile(profile)
     }

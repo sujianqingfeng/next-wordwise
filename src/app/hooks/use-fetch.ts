@@ -1,11 +1,11 @@
-import { API_PROXY, SERVER_HOST } from '../constants'
+import { API_PROXY, SERVER_HOST } from '../../constants'
 import { useEnv } from './use-env'
 
 export function useFetch() {
   const { isServer } = useEnv()
 
   function getBaseUrl(url: string) {
-    return isServer ? `${SERVER_HOST}/${url}` : `${API_PROXY}/${url}`
+    return isServer ? `${SERVER_HOST}${url}` : `${API_PROXY}/${url}`
   }
 
   async function getTokenFromServer() {
@@ -34,6 +34,7 @@ export function useFetch() {
     }
 
     const finalUrl = getBaseUrl(url)
+    console.log('🚀 ~ file: use-fetch.ts:37 ~ useFetch ~ finalUrl:', finalUrl)
 
     try {
       const res = await fetch(finalUrl, {
