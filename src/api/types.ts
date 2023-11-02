@@ -18,3 +18,8 @@ export type ProfileResp = {
   volcanoAccessKeyId: string
   volcanoSecretKey: string
 }
+
+export type WordItemResp = {
+  id: string
+  word: string
+}

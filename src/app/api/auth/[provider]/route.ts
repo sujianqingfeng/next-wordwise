@@ -1,6 +1,5 @@
-import { fetchJsonByPost } from '@/utils/fetch'
-import type { AuthReq, Token } from '@/api/types'
 import { NextRequest, NextResponse } from 'next/server'
+import { fetchAuthApi } from '@/api'
 
 export async function GET(
   request: NextRequest,
@@ -10,10 +9,7 @@ export async function GET(
   const code = searchParams.get('code')!
   const provider = params.provider
 
-  const res = await fetchJsonByPost<Token, AuthReq>('/auth', {
-    code,
-    provider
-  })
+  const res = await fetchAuthApi({ code, provider })
 
   const response = NextResponse.redirect(
     `${request.nextUrl.origin}/dashboard`,

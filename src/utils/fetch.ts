@@ -22,9 +22,9 @@ async function fetchJson<R = any>(url: string, opt?: RequestInit): Promise<R> {
 
   const isServer = typeof document === 'undefined'
   if (isServer) {
-    const token = getTokenFromServer()
+    const token = await getTokenFromServer()
     if (token) {
-      headers.authorization = `Bearer ${token}`
+      headers.authorization = token
     }
   }
 

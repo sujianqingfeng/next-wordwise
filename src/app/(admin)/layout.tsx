@@ -7,9 +7,9 @@ export default function AdminLayout({
   children: React.ReactNode
 }) {
   return (
-    <div className="flex justify-start">
+    <div className="h-full flex justify-start">
       <div className="w-[200px] bg-gray-300">
-        <header className="p-4 flex justify-center items-center">
+        <header className="h-[100px] flex justify-center items-center">
           <Logo />
         </header>
         <div className="p-2">
