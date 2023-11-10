@@ -1,32 +1,24 @@
 'use client'
 
-import { ProfileResp } from '@/api/types'
+import type { ProfileResp } from '@/api/types'
 import { useForm } from 'react-hook-form'
-import { useEffect, useState } from 'react'
-import { useFetch } from '@/app/hooks/use-fetch'
-import { fetchProfileApi } from '@/api'
+import { fetchProfileApi, fetchUpdateProfileApi } from '@/api'
+import { useFetch } from '@/hooks/use-fetch'
 
 export default function Page() {
-  const [profile, setProfile] = useState<ProfileResp>({
-    volcanoAccessKeyId: '',
-    volcanoSecretKey: ''
-  })
   const { register, handleSubmit } = useForm<ProfileResp>()
-  const { fetchJsonByGet, fetchJsonByPut } = useFetch()
+  const { result: profile } = useFetch<ProfileResp>({
+    apiFn: fetchProfileApi,
+    defaultValue: {
+      volcanoAccessKeyId: '',
+      volcanoSecretKey: ''
+    }
+  })
 
   const onSubmit = async (data: ProfileResp) => {
-    const res = await fetchJsonByPut('/profile', { ...profile, ...data })
+    const res = await fetchUpdateProfileApi({ ...profile, ...data })
     console.log('🚀 ~ file: page.tsx:19 ~ onSubmit ~ res:', res)
   }
-
-  useEffect(() => {
-    const fetchProfile = async () => {
-      const profile = await fetchProfileApi()
-      console.log('🚀 ~ file: page.tsx:24 ~ fetchProfile ~ profile:', profile)
-      setProfile(profile)
-    }
-    fetchProfile()
-  }, [])
 
   return (
     <>

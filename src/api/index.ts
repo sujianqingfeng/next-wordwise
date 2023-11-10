@@ -3,12 +3,15 @@ import type {
   AuthReq,
   ProfileResp,
   Token,
-  WordItemResp
+  WordItemResp,
+  WordPageReq
 } from './types'
+
 import {
   fetchJsonByDelete,
   fetchJsonByGet,
-  fetchJsonByPost
+  fetchJsonByPost,
+  fetchJsonByPut
 } from '@/utils/fetch'
 
 export const fetchAuthProvidersApi = () => {
@@ -23,8 +26,12 @@ export const fetchProfileApi = () => {
   return fetchJsonByGet<ProfileResp>('/profile')
 }
 
-export const fetchWordsApi = () => {
-  return fetchJsonByGet<WordItemResp[]>('/word/list')
+export const fetchUpdateProfileApi = (data: ProfileResp) => {
+  return fetchJsonByPut('/profile', data)
+}
+
+export const fetchWordsApi = (query: WordPageReq) => {
+  return fetchJsonByGet<WordItemResp[]>('/word/list', query)
 }
 
 export const fetchDeleteWordApi = (word: string) => {

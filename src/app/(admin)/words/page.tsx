@@ -2,26 +2,23 @@
 
 import { fetchDeleteWordApi, fetchWordsApi } from '@/api'
 import WordItem from './components/WordItem'
-import { useState, useEffect } from 'react'
-import { WordItemResp } from '@/api/types'
+import type { WordItemResp, WordPageReq } from '@/api/types'
+import { useFetchList } from '@/hooks/use-fetch'
 
 export default function Page() {
-  const [words, setWords] = useState<WordItemResp[]>([])
-
-  const fetchWords = async () => {
-    const words = await fetchWordsApi()
-    setWords(words)
-  }
+  const { result: words } = useFetchList<WordItemResp[], WordPageReq>({
+    apiFn: fetchWordsApi,
+    defaultQuery: {
+      skip: 1
+    },
+    defaultValue: []
+  })
 
   const onDelete = async (item: WordItemResp) => {
     const res = await fetchDeleteWordApi(item.word)
     console.log('🚀 ~ file: page.tsx:18 ~ onDelete ~ res:', res)
-    fetchWords()
+    // fetchWordList()
   }
-
-  useEffect(() => {
-    fetchWords()
-  }, [])
 
   return (
     <div>

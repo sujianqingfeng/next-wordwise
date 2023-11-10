@@ -1,3 +1,8 @@
+export type PageReq = {
+  skip: number
+  take?: number
+}
+
 export type AuthProvidersItemResp = {
   provider: string
   authUrl: string
@@ -18,6 +23,8 @@ export type ProfileResp = {
   volcanoAccessKeyId: string
   volcanoSecretKey: string
 }
+
+export type WordPageReq = PageReq
 
 export type WordItemResp = {
   id: string

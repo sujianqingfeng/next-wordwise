@@ -75,7 +75,7 @@ export function fetchJsonByGet<R = any, T extends Record<string, any> = any>(
   data?: T,
   opt?: RequestInit
 ) {
-  const newUrl = `${url}${new URLSearchParams(data).toString()}`
+  const newUrl = `${url}?${new URLSearchParams(data).toString()}`
   return fetchJson<R>(newUrl, opt)
 }
 
