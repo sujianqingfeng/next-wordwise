@@ -4,6 +4,7 @@ import type { ProfileResp } from '@/api/types'
 import { useForm } from 'react-hook-form'
 import { fetchProfileApi, fetchUpdateProfileApi } from '@/api'
 import { useFetch } from '@/hooks/use-fetch'
+import ProfileInput from './components/ProfileInput'
 
 export default function Page() {
   const { register, handleSubmit } = useForm<ProfileResp>()
@@ -11,7 +12,8 @@ export default function Page() {
     apiFn: fetchProfileApi,
     defaultValue: {
       volcanoAccessKeyId: '',
-      volcanoSecretKey: ''
+      volcanoSecretKey: '',
+      deepLAuthKey: ''
     }
   })
 
@@ -24,24 +26,27 @@ export default function Page() {
     <>
       <p>keys</p>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div>
-          <p>volcano access key id</p>
-          <input
-            className="text-2 border-2 border-gray-300 rounded-md w-[400px] outline-none px-1"
-            placeholder="place input volcanoAccessKeyId"
-            defaultValue={profile.volcanoAccessKeyId}
-            {...register('volcanoAccessKeyId')}
-          />
-        </div>
-        <div>
-          <p>volcano secret key</p>
-          <input
-            className="text-2 border-2 border-gray-300 rounded-md w-[400px] outline-none px-1"
-            placeholder="place input volcanoSecretKey"
-            defaultValue={profile.volcanoSecretKey}
-            {...register('volcanoSecretKey')}
-          />
-        </div>
+        <ProfileInput
+          label="volcanoAccessKeyId"
+          inputProps={{
+            defaultValue: profile.volcanoAccessKeyId,
+            ...register('volcanoAccessKeyId')
+          }}
+        />
+        <ProfileInput
+          label="volcanoSecretKey"
+          inputProps={{
+            defaultValue: profile.volcanoSecretKey,
+            ...register('volcanoSecretKey')
+          }}
+        />
+        <ProfileInput
+          label="deepLAuthKey"
+          inputProps={{
+            defaultValue: profile.deepLAuthKey,
+            ...register('deepLAuthKey')
+          }}
+        />
 
         <input
           type="submit"

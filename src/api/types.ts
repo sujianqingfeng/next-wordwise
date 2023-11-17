@@ -22,6 +22,7 @@ export type ProfileResp = {
   userId?: string
   volcanoAccessKeyId: string
   volcanoSecretKey: string
+  deepLAuthKey: string
 }
 
 export type WordPageReq = PageReq
