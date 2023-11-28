@@ -20,7 +20,7 @@ export function usePlacement({
   if (triggerRect && contentRect) {
     position.left =
       triggerRect.left + triggerRect.width / 2 - contentRect.width / 2
-    position.top = triggerRect.top + triggerRect.height
+    position.top = triggerRect.top + triggerRect.height + 1
   }
 
   return position

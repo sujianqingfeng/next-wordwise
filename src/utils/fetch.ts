@@ -38,7 +38,10 @@ async function fetchJson<R = any>(url: string, opt?: RequestInit): Promise<R> {
     })
 
     if (!res.ok) {
-      throw new Error('Failed to fetch data')
+      const { status, url, statusText } = res
+      throw new Error(
+        `Failed to fetch data | url: ${url} | status: ${status} | statusText: ${statusText}`
+      )
     }
     const json = await res.json()
     const { data, code = 0 } = json
@@ -75,7 +78,11 @@ export function fetchJsonByGet<R = any, T extends Record<string, any> = any>(
   data?: T,
   opt?: RequestInit
 ) {
-  const newUrl = `${url}?${new URLSearchParams(data).toString()}`
+  let query = new URLSearchParams(data).toString()
+  if (query) {
+    query = `?${query}`
+  }
+  const newUrl = `${url}${query}`
   return fetchJson<R>(newUrl, opt)
 }
 

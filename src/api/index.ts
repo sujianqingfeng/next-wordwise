@@ -30,10 +30,15 @@ export const fetchUpdateProfileApi = (data: ProfileResp) => {
   return fetchJsonByPut('/profile', data)
 }
 
+// word
 export const fetchWordsApi = (query: WordPageReq) => {
   return fetchJsonByGet<WordItemResp[]>('/word/list', query)
 }
 
 export const fetchDeleteWordApi = (word: string) => {
   return fetchJsonByDelete('/word', { word })
+}
+
+export const fetchYearCalendarWordApi = () => {
+  return fetchJsonByGet('/word/year-calendar')
 }
