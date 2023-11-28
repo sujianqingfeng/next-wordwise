@@ -1,4 +1,4 @@
-import Logo from '@/app/components/logo'
+import Logo from '@/components/Logo'
 import { Nav } from './components/nav'
 
 export default function AdminLayout({

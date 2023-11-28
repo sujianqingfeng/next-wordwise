@@ -1,4 +1,4 @@
-import Logo from '@/app/components/logo'
+import Logo from '@/components/Logo'
 import AuthButton from './components/auth-button'
 import { fetchAuthProvidersApi } from '@/api'
 

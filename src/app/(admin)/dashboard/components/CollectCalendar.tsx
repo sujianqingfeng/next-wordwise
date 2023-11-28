@@ -23,6 +23,16 @@ export default function CollectCalendar(props: CollectCalendarProps) {
     return addDays(previousYearStartOfWeek, i + j * ROW)
   }
 
+  const getContent = (i: number, j: number) => {
+    const currentDay = formatDay(getCurrentDay(i, j))
+    const current = data[currentDay]
+
+    let content = current ? `${current.count} collection` : 'No collection'
+    content += ` on ${currentDay}`
+
+    return content
+  }
+
   const getBG = (i: number, j: number) => {
     const current = data[formatDay(getCurrentDay(i, j))]
     if (current) {
@@ -38,9 +48,6 @@ export default function CollectCalendar(props: CollectCalendarProps) {
 
   return (
     <div>
-      <ToolTip>
-        <div>ffff</div>
-      </ToolTip>
       <table className="border-spacing-1 border-separate">
         <tbody>
           {Array.from({ length: ROW }).map((_, i) => {
@@ -52,13 +59,14 @@ export default function CollectCalendar(props: CollectCalendarProps) {
                   }
 
                   return (
-                    <td
-                      key={i + j * ROW}
-                      className={`w-[10px]  rounded-sm overflow-hidden ${getBG(
-                        i,
-                        j
-                      )}`}
-                    ></td>
+                    <ToolTip key={i + j * ROW} content={getContent(i, j)}>
+                      <td
+                        className={`w-[10px]  rounded-sm overflow-hidden ${getBG(
+                          i,
+                          j
+                        )}`}
+                      ></td>
+                    </ToolTip>
                   )
                 })}
               </tr>
