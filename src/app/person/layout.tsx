@@ -16,7 +16,10 @@ export default function AdminLayout({
           <Nav />
         </div>
       </div>
-      <div className="p-2">{children}</div>
+      <div className="flex-auto">
+        <div className="p-2 text-lg font-bold">dash</div>
+        <div className="p-2">{children}</div>
+      </div>
     </div>
   )
 }
