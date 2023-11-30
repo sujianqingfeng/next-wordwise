@@ -12,7 +12,7 @@ export async function GET(
   const res = await fetchAuthApi({ code, provider })
 
   const response = NextResponse.redirect(
-    `${request.nextUrl.origin}/dashboard`,
+    new URL('/person/dashboard', request.nextUrl.origin),
     {
       status: 302
     }

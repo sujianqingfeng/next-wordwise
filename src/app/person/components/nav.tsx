@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation'
 
 // TODO:
 const links = ['dashboard', 'words', 'profile'].map((s) => ({
-  href: `/${s}`,
+  href: `/person/${s}`,
   label: s.charAt(0).toUpperCase() + s.slice(1)
 }))
 

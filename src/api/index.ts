@@ -22,6 +22,13 @@ export const fetchAuthApi = (data: AuthReq) => {
   return fetchJsonByPost<Token>('/auth', data)
 }
 
+// user
+export const fetchUserApi = (opt?: RequestInit) => {
+  return fetchJsonByGet<ProfileResp>('/user', '', opt)
+}
+
+// profile
+
 export const fetchProfileApi = () => {
   return fetchJsonByGet<ProfileResp>('/profile')
 }
