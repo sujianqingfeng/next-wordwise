@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import Logo from '@/components/Logo'
 import DarkModeButton from '@/components/DarkModeButton'
+import Footer from './components/Footer'
 
 export default function HomeLayout({
   children
@@ -9,8 +10,8 @@ export default function HomeLayout({
 }) {
   return (
     <>
-      <header className="h-[100px] flex justify-center items-center">
-        <div className="w-[70%] h-full flex justify-between items-center">
+      <header className="h-[60px] xl:h-[100px] text-slate-700 dark:text-slate-200">
+        <div className="px-2 xl:px-0 max-w-7xl mx-auto h-full flex justify-between items-center">
           <div>
             <Logo />
           </div>
@@ -23,7 +24,7 @@ export default function HomeLayout({
         </div>
       </header>
       {children}
-      <footer className="h-2 text-center">footer</footer>
+      <Footer />
     </>
   )
 }

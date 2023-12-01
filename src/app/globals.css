@@ -6,12 +6,6 @@
   --primary-color: #de7897;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --primary-color: #de7897;
-  }
-}
-
 @layer base {
   body {
     @apply bg-white dark:bg-gray-800;

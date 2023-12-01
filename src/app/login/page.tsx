@@ -9,8 +9,8 @@ export default async function Page() {
 
   return (
     <>
-      <header className="h-[100px] flex items-center">
-        <div className="pl-10">
+      <header className="h-[60px] xl:h-[100px] text-slate-700 dark:text-slate-200">
+        <div className="h-full px-2 max-w-7xl mx-auto flex justify-start items-center">
           <Logo></Logo>
         </div>
       </header>

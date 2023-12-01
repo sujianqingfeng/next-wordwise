@@ -9,17 +9,18 @@ export async function GET(
   const code = searchParams.get('code')!
   const provider = params.provider
 
-  const res = await fetchAuthApi({ code, provider })
+  const { token } = await fetchAuthApi({ code, provider })
 
+  const cookieToken = `Bearer ${token}`
   const response = NextResponse.redirect(
-    new URL('/person/dashboard', request.nextUrl.origin),
+    new URL(`/person/dashboard?token=${cookieToken}`, request.nextUrl.origin),
     {
       status: 302
     }
   )
   response.headers.set(
     'Set-Cookie',
-    `token=Bearer ${res.token}; Path=/; HttpOnly; SameSite=Strict;`
+    `token=${cookieToken}; Path=/; HttpOnly; SameSite=Strict;`
   )
   return response
 }

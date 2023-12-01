@@ -1,20 +1,14 @@
 'use client'
 
 import { useDarkMode } from '@/hooks/use-dark-mode'
-import sun from 'icons/sun.svg'
-import moon from 'icons/moon.svg'
-import Image from 'next/image'
+import { IoSunnyOutline, IoMoonOutline } from 'react-icons/io5'
 
 function DarkModeButton() {
   const { isDark, toggleThemeMode } = useDarkMode()
 
   return (
     <button onClick={toggleThemeMode}>
-      {isDark ? (
-        <Image src={sun} alt="theme mode" width={24} />
-      ) : (
-        <Image src={moon} alt="theme mode" width={24} />
-      )}
+      {isDark ? <IoSunnyOutline size={24} /> : <IoMoonOutline size={24} />}
     </button>
   )
 }

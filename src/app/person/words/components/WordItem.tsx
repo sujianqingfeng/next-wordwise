@@ -1,8 +1,7 @@
 'use client'
 
 import type { WordItemResp } from '@/api/types'
-import Image from 'next/image'
-import Trash from 'icons/trash.svg'
+import { MdDeleteOutline } from 'react-icons/md'
 
 type WordItemProps = {
   item: WordItemResp
@@ -16,7 +15,7 @@ export default function WordItem(props: WordItemProps) {
     <div className="flex justify-between items-center">
       <div>{item.word}</div>
       <button onClick={() => onDelete(item)}>
-        <Image src={Trash} alt="delete" width={20} height={20} />
+        <MdDeleteOutline size={20} />
       </button>
     </div>
   )

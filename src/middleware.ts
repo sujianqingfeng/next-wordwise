@@ -5,12 +5,17 @@ import { createSafePromise } from './utils/basic'
 export async function middleware(request: NextRequest) {
   const safeFetchUserApi = createSafePromise(fetchUserApi)
 
-  const token = request.cookies.get('token')
+  const token =
+    request.cookies.get('token')?.value ||
+    request.nextUrl.searchParams.get('token')
+
   const [isOk] = await safeFetchUserApi({
     headers: {
-      authorization: token ? token.value : ''
+      authorization: token ?? ''
     }
   })
+  console.log('🚀 ~ file: middleware.ts:14 ~ middleware ~ isOk:', isOk)
+
   if (!isOk) {
     return NextResponse.redirect(new URL('/login', request.url))
   }
