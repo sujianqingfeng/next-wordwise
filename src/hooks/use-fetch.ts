@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 
 type FetchOptions<T, Q> = {
-  defaultValue: T
+  defaultValue: Partial<T>
   defaultQuery?: Partial<Q>
   apiFn: (query: any) => Promise<any>
   autoFetch?: boolean
@@ -19,7 +19,7 @@ export function useFetch<T, Q = Record<string, any>>(
     defaultQuery = {}
   } = options
   const [loading, setLoading] = useState(false)
-  const [result, setResult] = useState<T>(defaultValue)
+  const [result, setResult] = useState<T>(defaultValue as T)
 
   const fetchApi = async (query?: Partial<Q>) => {
     setLoading(true)
@@ -87,7 +87,7 @@ export function useFetchList<T extends any[], Q = Record<string, any>>(
   }
 
   const clear = () => {
-    setResult(defaultValue)
+    setResult(defaultValue as T)
     setTotal(0)
     setEnd(false)
   }

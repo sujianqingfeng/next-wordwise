@@ -1,5 +1,11 @@
 import Logo from '@/components/Logo'
-import { Nav } from './components/nav'
+import { TheHeader } from './components/TheHeader'
+import { TheNav } from './components/TheNav'
+
+const links = ['dashboard', 'words', 'profile'].map((s) => ({
+  href: `/person/${s}`,
+  label: s.charAt(0).toUpperCase() + s.slice(1)
+}))
 
 export default function AdminLayout({
   children
@@ -13,11 +19,11 @@ export default function AdminLayout({
           <Logo />
         </header>
         <div className="p-2">
-          <Nav />
+          <TheNav links={links} />
         </div>
       </div>
       <div className="flex-auto">
-        <div className="p-2 text-lg font-bold">dash</div>
+        <TheHeader links={links} />
         <div className="p-2">{children}</div>
       </div>
     </div>

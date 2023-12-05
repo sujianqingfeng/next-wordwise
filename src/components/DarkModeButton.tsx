@@ -8,7 +8,7 @@ function DarkModeButton() {
 
   return (
     <button onClick={toggleThemeMode}>
-      {isDark ? <IoSunnyOutline size={24} /> : <IoMoonOutline size={24} />}
+      {isDark ? <IoSunnyOutline size={22} /> : <IoMoonOutline size={22} />}
     </button>
   )
 }

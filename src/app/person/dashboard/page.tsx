@@ -1,17 +1,21 @@
 import { fetchYearCalendarWordApi } from '@/api'
 import CollectCalendar from './components/CollectCalendar'
 
-const data = {
-  '2023-10-01': { count: 4 },
-  '2023-11-27': { count: 7 }
-}
-
-export default function Page() {
-  // const res = await fetchYearCalendarWordApi()
+export default async function Page({
+  searchParams
+}: {
+  searchParams: { [key: string]: string | string[] | undefined }
+}) {
+  const calendar = await fetchYearCalendarWordApi({
+    headers: {
+      authorization: (searchParams.token as string) ?? ''
+    }
+  })
 
   return (
     <>
-      <CollectCalendar data={data} />
+      <div>calendar</div>
+      <CollectCalendar data={calendar} />
     </>
   )
 }

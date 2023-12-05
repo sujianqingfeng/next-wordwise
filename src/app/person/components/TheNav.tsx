@@ -3,13 +3,11 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
-// TODO:
-const links = ['dashboard', 'words', 'profile'].map((s) => ({
-  href: `/person/${s}`,
-  label: s.charAt(0).toUpperCase() + s.slice(1)
-}))
-
-export function Nav() {
+type TheNavProps = {
+  links: { href: string; label: string }[]
+}
+export function TheNav(props: TheNavProps) {
+  const { links = [] } = props
   const pathname = usePathname()
 
   return (

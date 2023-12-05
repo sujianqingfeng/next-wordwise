@@ -3,6 +3,8 @@ import type {
   AuthReq,
   ProfileResp,
   Token,
+  UserResp,
+  WordCalendarResp,
   WordItemResp,
   WordPageReq
 } from './types'
@@ -24,7 +26,7 @@ export const fetchAuthApi = (data: AuthReq) => {
 
 // user
 export const fetchUserApi = (opt?: RequestInit) => {
-  return fetchJsonByGet<ProfileResp>('/user', '', opt)
+  return fetchJsonByGet<UserResp>('/user', '', opt)
 }
 
 // profile
@@ -46,6 +48,6 @@ export const fetchDeleteWordApi = (word: string) => {
   return fetchJsonByDelete('/word', { word })
 }
 
-export const fetchYearCalendarWordApi = () => {
-  return fetchJsonByGet('/word/year-calendar')
+export const fetchYearCalendarWordApi = (opt?: RequestInit) => {
+  return fetchJsonByGet<WordCalendarResp>('/word/year-calendar', '', opt)
 }
