@@ -6,6 +6,7 @@ type FetchOptions<T, Q> = {
   apiFn: (query: any) => Promise<any>
   autoFetch?: boolean
   format?: (data: any) => T
+  successCallback?: (data: T) => void
 }
 
 export function useFetch<T, Q = Record<string, any>>(
@@ -16,7 +17,8 @@ export function useFetch<T, Q = Record<string, any>>(
     format,
     autoFetch = true,
     defaultValue,
-    defaultQuery = {}
+    defaultQuery = {},
+    successCallback
   } = options
   const [loading, setLoading] = useState(false)
   const [result, setResult] = useState<T>(defaultValue as T)
@@ -26,6 +28,7 @@ export function useFetch<T, Q = Record<string, any>>(
     const res = await apiFn({ ...defaultQuery, ...query })
     setResult(format ? format(res) : res)
     setLoading(false)
+    successCallback && successCallback(res)
     return res as T
   }
 

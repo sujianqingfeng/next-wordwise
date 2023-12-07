@@ -5,9 +5,7 @@ import { createSafePromise } from './utils/basic'
 export async function middleware(request: NextRequest) {
   const safeFetchUserApi = createSafePromise(fetchUserApi)
 
-  const token =
-    request.cookies.get('token')?.value ||
-    request.nextUrl.searchParams.get('token')
+  const token = request.cookies.get('token')?.value
 
   const [isOk] = await safeFetchUserApi({
     headers: {
