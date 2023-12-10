@@ -6,8 +6,11 @@ export default function AuthButton(props: AuthProvidersItemResp) {
   const { authUrl } = props
 
   return (
-    <Link href={authUrl} className="w-full flex items-center justify-center">
-      <button className="w-full md:w-[300px] flex items-center justify-center gap-2 bg-slate-600 p-2 rounded-md">
+    <Link
+      href={authUrl}
+      className="w-full md:w-[300px] flex items-center justify-center"
+    >
+      <button className="w-full flex items-center justify-center gap-2 bg-slate-600 p-2 rounded-md">
         <FcGoogle />
         Google Auth
       </button>
