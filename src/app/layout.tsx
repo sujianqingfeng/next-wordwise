@@ -1,3 +1,4 @@
+import { ThemeProvider } from '@/components/ThemeProvider'
 import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
@@ -16,7 +17,16 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="h-screen">
-      <body className={`${inter.className} h-full`}>{children}</body>
+      <body className={`${inter.className} h-full`}>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+        </ThemeProvider>
+      </body>
     </html>
   )
 }

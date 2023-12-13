@@ -3,7 +3,6 @@ export default function Footer() {
     <footer
       className="
         h-[40px]
-        absolute bottom-0 left-0 right-0
         border-t border-gray-200 
         text-slate-700 
         dark:text-slate-400 dark:border-slate-700

@@ -2,7 +2,7 @@ import Link from 'next/link'
 
 export default function Home() {
   return (
-    <main className="h-full flex justify-center items-center">
+    <main className="">
       <section className="px-2 text-center">
         <p className="text-4xl md:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500">
           Unlock the Joy of Learning, Elevate Your Vocabulary Journey
@@ -19,6 +19,8 @@ export default function Home() {
           </Link>
         </div>
       </section>
+
+      <section className="h-[300px]">ffff</section>
     </main>
   )
 }

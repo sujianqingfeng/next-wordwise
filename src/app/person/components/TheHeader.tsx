@@ -22,7 +22,7 @@ export function TheHeader(props: TheHeaderProps) {
   })
 
   return (
-    <div className="px-2 h-10 flex justify-between items-center">
+    <div className="px-2 h-10 flex justify-between items-center border-b">
       <div className="text-lg font-bold">{title}</div>
 
       <div className="flex justify-start items-center gap-x-4">

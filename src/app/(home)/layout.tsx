@@ -25,9 +25,7 @@ export default function HomeLayout({
           </div>
         </div>
       </header>
-      <div className="h-[calc(100vh-100px)] md:h-[calc(100vh-140px)]">
-        {children}
-      </div>
+      <div className="">{children}</div>
       <Footer />
     </>
   )

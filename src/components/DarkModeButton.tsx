@@ -1,14 +1,21 @@
 'use client'
 
-import { useDarkMode } from '@/hooks/use-dark-mode'
-import { IoSunnyOutline, IoMoonOutline } from 'react-icons/io5'
+import { MoonIcon, SunIcon } from '@radix-ui/react-icons'
+import { useTheme } from 'next-themes'
 
 function DarkModeButton() {
-  const { isDark, toggleThemeMode } = useDarkMode()
+  const { setTheme, theme } = useTheme()
+  const toggleThemeMode = () => {
+    setTheme(theme === 'dark' ? 'light' : 'dark')
+  }
 
   return (
     <button onClick={toggleThemeMode}>
-      {isDark ? <IoSunnyOutline size={22} /> : <IoMoonOutline size={22} />}
+      {theme === 'dark' ? (
+        <SunIcon width={22} height={22} />
+      ) : (
+        <MoonIcon width={22} height={22} />
+      )}
     </button>
   )
 }
