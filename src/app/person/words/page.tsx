@@ -9,7 +9,7 @@ export default function Page() {
   const { result: words } = useFetchList<WordItemResp[], WordPageReq>({
     apiFn: fetchWordsApi,
     defaultQuery: {
-      skip: 1
+      offset: 1
     },
     defaultValue: []
   })
