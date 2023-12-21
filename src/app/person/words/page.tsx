@@ -5,6 +5,15 @@ import WordItem from './components/WordItem'
 import type { WordItemResp, WordPageReq } from '@/api/types'
 import { useFetchList } from '@/hooks/use-fetch'
 import { Button } from '@/components/ui/button'
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHeader,
+  TableRow,
+  TableHead
+} from '@/components/ui/table'
+import { TrashIcon } from '@radix-ui/react-icons'
 
 export default function Page() {
   const { result: words } = useFetchList<WordItemResp[], WordPageReq>({
@@ -25,9 +34,29 @@ export default function Page() {
     <div>
       <Button>export</Button>
 
-      {words.map((word) => (
-        <WordItem key={word.id} item={word} onDelete={onDelete} />
-      ))}
+      <Table>
+        <TableHeader>
+          <TableRow>
+            <TableHead>word</TableHead>
+            <TableHead>translation</TableHead>
+            <TableHead className="w-100">operation</TableHead>
+          </TableRow>
+        </TableHeader>
+
+        <TableBody>
+          {words.map((word) => (
+            <TableRow key={word.id}>
+              <TableCell>{word.word}</TableCell>
+              <TableCell>{word.simpleTranslate}</TableCell>
+              <TableCell>
+                <Button variant="ghost" onClick={() => onDelete(word)}>
+                  <TrashIcon />
+                </Button>
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
     </div>
   )
 }
