@@ -19,7 +19,7 @@ export default function Page() {
   const { result: words } = useFetchList<WordItemResp[], WordPageReq>({
     apiFn: fetchWordsApi,
     defaultQuery: {
-      offset: 1
+      page: 1
     },
     defaultValue: []
   })

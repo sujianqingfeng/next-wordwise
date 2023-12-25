@@ -64,9 +64,8 @@ export function useFetchList<T extends any[], Q = Record<string, any>>(
   const [isEnd, setEnd] = useState(false)
 
   const pageFormat = (data: any) => {
-    const { list, total, isLast } = data
+    const { data: list, total } = data
     setTotal(total)
-    setEnd(isLast)
     let res = format ? format(list) : list
     if (isStore) {
       res = [...result, res]

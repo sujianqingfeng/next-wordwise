@@ -1,6 +1,6 @@
 export type PageReq = {
-  offset: number
-  limit?: number
+  page: number
+  size?: number
 }
 
 export type AuthProvidersItemResp = {
