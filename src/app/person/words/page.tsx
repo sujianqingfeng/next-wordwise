@@ -47,7 +47,7 @@ export default function Page() {
           {words.map((word) => (
             <TableRow key={word.id}>
               <TableCell>{word.word}</TableCell>
-              <TableCell>{word.simpleTranslate}</TableCell>
+              <TableCell>{word.simpleTranslation}</TableCell>
               <TableCell>
                 <Button variant="ghost" onClick={() => onDelete(word)}>
                   <TrashIcon />

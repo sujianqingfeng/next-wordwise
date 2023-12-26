@@ -15,6 +15,7 @@ import {
   FormLabel
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
+import TranslationForm from './components/TranslationForm'
 
 const FormSchema = z.object({
   volcanoAccessKeyId: z.string(),
@@ -44,7 +45,10 @@ export default function Page() {
 
   return (
     <>
-      <p>keys</p>
+      <p className="text-lg font-bold">Translation providers</p>
+
+      <TranslationForm></TranslationForm>
+
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
           <FormField

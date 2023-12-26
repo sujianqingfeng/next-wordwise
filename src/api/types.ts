@@ -41,7 +41,7 @@ export type WordPageReq = PageReq
 export type WordItemResp = {
   id: string
   word: string
-  simpleTranslate: string
+  simpleTranslation: string
 }
 
 export type WordCalendarResp = {
