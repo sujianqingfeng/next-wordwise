@@ -33,6 +33,7 @@ export type ProfileResp = {
   volcanoAccessKeyId: string
   volcanoSecretKey: string
   deepLAuthKey: string
+  defaultTranslation: 'deepL' | 'volcano'
 }
 
 // word
