@@ -1,10 +1,13 @@
+import { useToast } from '@/components/ui/use-toast'
+import { createSafePromise } from '@/utils/basic'
 import { useEffect, useState } from 'react'
 
 type FetchOptions<T, Q> = {
-  defaultValue: Partial<T>
+  defaultValue?: Partial<T>
   defaultQuery?: Partial<Q>
-  apiFn: (query: any) => Promise<any>
   autoFetch?: boolean
+  errorAlertToast?: boolean
+  apiFn: (query: any) => Promise<any>
   format?: (data: any) => T
   successCallback?: (data: T) => void
 }
@@ -16,20 +19,42 @@ export function useFetch<T, Q = Record<string, any>>(
     apiFn,
     format,
     autoFetch = true,
-    defaultValue,
+    errorAlertToast = true,
+    defaultValue = {},
     defaultQuery = {},
     successCallback
   } = options
+  const { toast } = useToast()
   const [loading, setLoading] = useState(false)
   const [result, setResult] = useState<T>(defaultValue as T)
 
+  // const fetchApi = async (query?: Partial<Q>) => {
+  //   setLoading(true)
+  //   const res = await apiFn({ ...defaultQuery, ...query })
+  //   setResult(format ? format(res) : res)
+  //   setLoading(false)
+  //   successCallback && successCallback(res)
+  //   return res as T
+  // }
+
   const fetchApi = async (query?: Partial<Q>) => {
+    const api = createSafePromise<T>(apiFn)
     setLoading(true)
-    const res = await apiFn({ ...defaultQuery, ...query })
-    setResult(format ? format(res) : res)
+    const res = await api({ ...defaultQuery, ...query })
     setLoading(false)
-    successCallback && successCallback(res)
-    return res as T
+    const [isOk, dataOrError] = res
+    if (!isOk) {
+      if (errorAlertToast) {
+        toast({
+          description: dataOrError.message,
+          variant: 'destructive'
+        })
+      }
+      return res
+    }
+    setResult(format ? format(dataOrError) : dataOrError)
+    successCallback && successCallback(dataOrError)
+    return res
   }
 
   useEffect(() => {

@@ -23,12 +23,23 @@ import {
   type FormValues,
   TranslationProviders
 } from './helper'
+import { fetchUpdateTranslationProfileApi } from '@/api'
+import { useFetch } from '@/hooks/use-fetch'
+import { ReloadIcon } from '@radix-ui/react-icons'
+import { useToast } from '@/components/ui/use-toast'
 
 type TranslationFormProps = {
   profile: FormValues
 }
 export default function TranslationForm(props: TranslationFormProps) {
   const { profile } = props
+  console.log('🚀 ~ file: index.tsx:36 ~ TranslationForm ~ profile:', profile)
+  const { toast } = useToast()
+  const { fetchApi: fetchUpdateTranslationProfile, loading } = useFetch({
+    apiFn: fetchUpdateTranslationProfileApi,
+    autoFetch: false
+  })
+
   const form = useForm<FormValues>({
     resolver: zodResolver(FormSchema),
     defaultValues: profile
@@ -37,8 +48,7 @@ export default function TranslationForm(props: TranslationFormProps) {
   const values = form.getValues()
   const providerForms = getCurrentProviderForms(values.defaultTranslation)
 
-  const onSubmit = (data: FormValues) => {
-    console.log('🚀 ~ file: TranslationForm.tsx:73 ~ onSubmit ~ data:', data)
+  const onSubmit = async (data: FormValues) => {
     const requiredData = providerForms
       .map((item) => item.name)
       .reduce(
@@ -50,10 +60,15 @@ export default function TranslationForm(props: TranslationFormProps) {
           defaultTranslation: data.defaultTranslation
         } as Record<string, string>
       )
-    console.log(
-      '🚀 ~ file: TranslationForm.tsx:126 ~ onSubmit ~ requiredData:',
-      requiredData
+
+    const [isOk] = await fetchUpdateTranslationProfile(
+      requiredData as FormValues
     )
+    if (isOk) {
+      toast({
+        title: 'update translation profile success'
+      })
+    }
   }
 
   return (
@@ -65,7 +80,10 @@ export default function TranslationForm(props: TranslationFormProps) {
           render={({ field }) => (
             <FormItem>
               <FormLabel>Default translation provider</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
+              <Select
+                onValueChange={field.onChange}
+                defaultValue={profile[field.name]}
+              >
                 <FormControl>
                   <SelectTrigger>
                     <SelectValue placeholder="select a translation provider"></SelectValue>
@@ -92,7 +110,11 @@ export default function TranslationForm(props: TranslationFormProps) {
               <FormItem>
                 <FormLabel>{item.label}</FormLabel>
                 <FormControl>
-                  <Input placeholder={item.label} {...field}></Input>
+                  <Input
+                    placeholder={item.label}
+                    {...field}
+                    value={profile[item.name]}
+                  ></Input>
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -101,6 +123,7 @@ export default function TranslationForm(props: TranslationFormProps) {
         ))}
 
         <Button className="mt-2" type="submit">
+          {loading && <ReloadIcon className="w-4 h-4 mr-2 animate-spin" />}
           Submit
         </Button>
       </form>

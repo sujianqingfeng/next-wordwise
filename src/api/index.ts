@@ -39,6 +39,10 @@ export const fetchUpdateProfileApi = (data: ProfileResp) => {
   return fetchJsonByPut('/profile', data)
 }
 
+export const fetchUpdateTranslationProfileApi = (data: ProfileResp) => {
+  return fetchJsonByPut('/profile/translation', data)
+}
+
 // word
 export const fetchWordsApi = (query: WordPageReq) => {
   return fetchJsonByGet<WordItemResp[]>('/word/list', query)

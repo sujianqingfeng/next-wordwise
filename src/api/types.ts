@@ -30,9 +30,9 @@ export type UserResp = {
 export type ProfileResp = {
   id?: string
   userId?: string
-  volcanoAccessKeyId: string
-  volcanoSecretKey: string
-  deepLAuthKey: string
+  volcanoAccessKeyId?: string
+  volcanoSecretKey?: string
+  deepLAuthKey?: string
   defaultTranslation: 'deepL' | 'volcano'
 }
 

@@ -44,12 +44,12 @@ async function fetchJson<R = any>(url: string, opt?: RequestInit): Promise<R> {
       )
     }
     const json = await res.json()
-    const { data, code = 0 } = json
+    const { data, code = 0, msg } = json
 
     if (code === 0) {
       return data
     } else {
-      throw new Error('data maybe not correct')
+      throw new Error(msg)
     }
   } catch (error) {
     throw error
