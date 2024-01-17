@@ -39,6 +39,7 @@ async function fetchJson<R = any>(url: string, opt?: RequestInit): Promise<R> {
 
     if (!res.ok) {
       const { status, url, statusText } = res
+
       throw new Error(
         `Failed to fetch data | url: ${url} | status: ${status} | statusText: ${statusText}`
       )
@@ -62,12 +63,16 @@ function fetchJsonByMethod(method: string) {
     data?: T,
     opt?: RequestInit
   ) => {
+    const defaultContentType = 'application/x-www-form-urlencoded'
+    const isFormData = data instanceof FormData
+    const defaultHeaders = {
+      'Content-Type': defaultContentType
+    }
+
     return fetchJson<R>(url, {
       method,
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded'
-      },
-      body: new URLSearchParams(data),
+      headers: isFormData ? {} : defaultHeaders,
+      body: isFormData ? data : new URLSearchParams(data),
       ...opt
     })
   }

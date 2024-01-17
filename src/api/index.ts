@@ -1,6 +1,7 @@
 import type {
   AuthProvidersItemResp,
   AuthReq,
+  BaseResp,
   ProfileResp,
   Token,
   UserResp,
@@ -45,11 +46,16 @@ export const fetchUpdateTranslationProfileApi = (data: ProfileResp) => {
 
 // word
 export const fetchWordsApi = (query: WordPageReq) => {
-  return fetchJsonByGet<WordItemResp[]>('/word/list', query)
+  return fetchJsonByGet<BaseResp<WordItemResp[]>>('/word/list', query)
 }
 
 export const fetchDeleteWordApi = (word: string) => {
   return fetchJsonByDelete('/word', { word })
+}
+
+// import words
+export const fetchImportWordsApi = (form: FormData) => {
+  return fetchJsonByPost('/word/import', form)
 }
 
 export const fetchYearCalendarWordApi = (opt?: RequestInit) => {

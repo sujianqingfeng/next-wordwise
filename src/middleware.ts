@@ -1,18 +1,21 @@
 import { NextResponse, NextRequest } from 'next/server'
-import { fetchUserApi } from './api'
-import { createSafePromise } from './utils/basic'
+import { jwtVerify } from 'jose'
 
 export async function middleware(request: NextRequest) {
-  const safeFetchUserApi = createSafePromise(fetchUserApi)
+  const tokenStr = request.cookies.get('token')?.value
 
-  const token = request.cookies.get('token')?.value
+  const [type, token] = tokenStr?.split(' ') ?? []
 
-  const [isOk] = await safeFetchUserApi({
-    headers: {
-      authorization: token ?? ''
-    }
-  })
-  console.log('🚀 ~ file: middleware.ts:14 ~ middleware ~ isOk:', isOk)
+  let isOk = false
+  if (type === 'Bearer') {
+    try {
+      await jwtVerify(
+        token,
+        new TextEncoder().encode(process.env.JWT_SECRET as string)
+      )
+      isOk = true
+    } catch (error) {}
+  }
 
   if (!isOk) {
     return NextResponse.redirect(new URL('/login', request.url))

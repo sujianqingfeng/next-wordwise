@@ -3,6 +3,16 @@ export type PageReq = {
   size?: number
 }
 
+export type BaseResp<T> = {
+  data: T
+  hasNextPage: boolean
+  hasPrevPage: boolean
+  total: number
+  totalPage: number
+}
+
+//
+
 export type AuthProvidersItemResp = {
   provider: string
   authUrl: string

@@ -17,8 +17,9 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className="h-screen">
+    <html lang="en" className="h-screen light">
       <body className={`${inter.className} h-full`}>
+        <Toaster />
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
@@ -27,7 +28,6 @@ export default function RootLayout({
         >
           {children}
         </ThemeProvider>
-        <Toaster />
       </body>
     </html>
   )

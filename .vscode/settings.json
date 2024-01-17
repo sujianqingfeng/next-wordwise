@@ -4,5 +4,6 @@
   "prettier.enable": true,
   "[typescriptreact]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
-  }
+  },
+  "eslint.experimental.useFlatConfig": false
 }
