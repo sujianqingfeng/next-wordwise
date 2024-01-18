@@ -14,7 +14,7 @@ export default function AdminLayout({
 }) {
   return (
     <div className="h-full flex justify-start">
-      <div className="w-[200px] bg-gray-300">
+      <div className="w-[200px] border-r">
         <header className="h-[100px] flex justify-center items-center">
           <Logo />
         </header>

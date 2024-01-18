@@ -1,4 +1,11 @@
-import ToolTip from '@/components/Tooltip'
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipPortal,
+  TooltipProvider,
+  TooltipTrigger
+} from '@/components/ui/tooltip'
+import { cn } from '@/lib/utils'
 import { subYears, startOfWeek, format, addDays, isAfter } from 'date-fns'
 
 const DAYS = 365
@@ -37,43 +44,51 @@ export default function CollectCalendar(props: CollectCalendarProps) {
     const current = data[formatDay(getCurrentDay(i, j))]
     if (current) {
       const { count } = current
-      const percent = count * 100
-      if (percent > 1000) {
-        return 'bg-primary-color'
+      const percent = count * 10
+      if (percent > 100) {
+        return 'bg-primary'
       }
-      return `bg-primary-color`
+      return `bg-primary/${percent}`
     }
     return 'bg-slate-300'
   }
 
   return (
     <div>
-      <table className="border-spacing-1 border-separate">
-        <tbody>
-          {Array.from({ length: ROW }).map((_, i) => {
-            return (
-              <tr className="h-[10px]" key={i}>
-                {Array.from({ length: COL }).map((_, j) => {
-                  if (isAfter(getCurrentDay(i, j), NOW)) {
-                    return null
-                  }
+      <TooltipProvider>
+        <table className="border-spacing-1 border-separate">
+          <tbody>
+            {Array.from({ length: ROW }).map((_, i) => {
+              return (
+                <tr className="h-[10px]" key={i}>
+                  {Array.from({ length: COL }).map((_, j) => {
+                    if (isAfter(getCurrentDay(i, j), NOW)) {
+                      return null
+                    }
 
-                  return (
-                    <ToolTip key={i + j * ROW} content={getContent(i, j)}>
-                      <td
-                        className={`w-[10px]  rounded-sm overflow-hidden ${getBG(
-                          i,
-                          j
-                        )}`}
-                      ></td>
-                    </ToolTip>
-                  )
-                })}
-              </tr>
-            )
-          })}
-        </tbody>
-      </table>
+                    return (
+                      <Tooltip key={i + j * ROW}>
+                        <TooltipTrigger asChild>
+                          <td
+                            className={cn(
+                              `w-[10px] rounded-sm overflow-hidden`,
+                              getBG(i, j)
+                            )}
+                          ></td>
+                        </TooltipTrigger>
+
+                        <TooltipPortal>
+                          <TooltipContent>{getContent(i, j)}</TooltipContent>
+                        </TooltipPortal>
+                      </Tooltip>
+                    )
+                  })}
+                </tr>
+              )
+            })}
+          </tbody>
+        </table>
+      </TooltipProvider>
     </div>
   )
 }

@@ -25,10 +25,11 @@ import {
   type FormValues,
   TranslationProviders
 } from './helper'
-import { fetchUpdateTranslationProfileApi } from '@/api'
-import { useFetch } from '@/hooks/use-fetch'
 import { ReloadIcon } from '@radix-ui/react-icons'
 import { useToast } from '@/components/ui/use-toast'
+import { updateTranslation } from '@/actions/profile'
+import type { ProfileResp } from '@/api/types'
+import { useState } from 'react'
 
 type TranslationFormProps = {
   profile: FormValues
@@ -37,14 +38,16 @@ export default function TranslationForm(props: TranslationFormProps) {
   const { profile } = props
   console.log('🚀 ~ file: index.tsx:36 ~ TranslationForm ~ profile:', profile)
   const { toast } = useToast()
-  const { fetchApi: fetchUpdateTranslationProfile, loading } = useFetch({
-    apiFn: fetchUpdateTranslationProfileApi,
-    autoFetch: false
-  })
+  const [loading, setLoading] = useState(false)
 
   const form = useForm<FormValues>({
     resolver: zodResolver(FormSchema),
-    defaultValues: profile
+    defaultValues: {
+      defaultTranslation: profile.defaultTranslation || 'deepL',
+      deepLAuthKey: profile.deepLAuthKey || '',
+      volcanoAccessKeyId: profile.volcanoAccessKeyId || '',
+      volcanoSecretKey: profile.volcanoSecretKey || ''
+    }
   })
 
   const values = form.getValues()
@@ -60,16 +63,23 @@ export default function TranslationForm(props: TranslationFormProps) {
         },
         {
           defaultTranslation: data.defaultTranslation
-        } as Record<string, string>
+        } as ProfileResp
       )
 
-    const [isOk] = await fetchUpdateTranslationProfile(
-      requiredData as FormValues
-    )
-    if (isOk) {
+    try {
+      setLoading(true)
+      await updateTranslation(requiredData)
       toast({
         title: 'update translation profile success'
       })
+    } catch (error) {
+      toast({
+        variant: 'destructive',
+        title: 'update translation profile failed',
+        description: (error as Error).message
+      })
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -101,7 +111,7 @@ export default function TranslationForm(props: TranslationFormProps) {
               </Select>
             </FormItem>
           )}
-        ></FormField>
+        />
 
         {providerForms.map((item) => (
           <FormField
@@ -112,11 +122,7 @@ export default function TranslationForm(props: TranslationFormProps) {
               <FormItem>
                 <FormLabel>{item.label}</FormLabel>
                 <FormControl>
-                  <Input
-                    placeholder={item.label}
-                    {...field}
-                    value={profile[item.name]}
-                  ></Input>
+                  <Input placeholder={item.label} {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
