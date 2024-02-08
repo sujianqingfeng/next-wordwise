@@ -1,9 +1,12 @@
 'use server'
 
-import { fetchUpdateTranslationProfileApi } from '@/api'
-import type { ProfileResp } from '@/api/types'
+import { fetchUpdatePwdApi, fetchUpdateTranslationProfileApi } from '@/api'
+import type { ChangePwdFormValues, ProfileResp } from '@/api/types'
 
 export async function updateTranslation(form: ProfileResp) {
-  console.log('🚀 ~ updateTranslation ~ form:', form)
   await fetchUpdateTranslationProfileApi(form)
+}
+
+export async function changePwd(form: ChangePwdFormValues) {
+  await fetchUpdatePwdApi(form)
 }

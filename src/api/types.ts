@@ -1,3 +1,6 @@
+import { z } from 'zod'
+import { ChangePwdSchema } from './validations'
+
 export type PageReq = {
   page: number
   size?: number
@@ -60,3 +63,5 @@ export type WordCalendarResp = {
     count: number
   }
 }
+
+export type ChangePwdFormValues = z.infer<typeof ChangePwdSchema>

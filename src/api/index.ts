@@ -2,6 +2,7 @@ import type {
   AuthProvidersItemResp,
   AuthReq,
   BaseResp,
+  ChangePwdFormValues,
   ProfileResp,
   Token,
   UserResp,
@@ -28,6 +29,10 @@ export const fetchAuthApi = (data: AuthReq) => {
 // user
 export const fetchUserApi = (opt?: RequestInit) => {
   return fetchJsonByGet<UserResp>('/user', '', opt)
+}
+
+export const fetchUpdatePwdApi = (data: ChangePwdFormValues) => {
+  return fetchJsonByPost('/user/change-pwd', data)
 }
 
 // profile

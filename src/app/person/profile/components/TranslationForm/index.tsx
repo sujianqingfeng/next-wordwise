@@ -36,7 +36,6 @@ type TranslationFormProps = {
 }
 export default function TranslationForm(props: TranslationFormProps) {
   const { profile } = props
-  console.log('🚀 ~ file: index.tsx:36 ~ TranslationForm ~ profile:', profile)
   const { toast } = useToast()
   const [loading, setLoading] = useState(false)
 
