@@ -45,7 +45,8 @@ export default function TranslationForm(props: TranslationFormProps) {
       defaultTranslation: profile.defaultTranslation || 'deepL',
       deepLAuthKey: profile.deepLAuthKey || '',
       volcanoAccessKeyId: profile.volcanoAccessKeyId || '',
-      volcanoSecretKey: profile.volcanoSecretKey || ''
+      volcanoSecretKey: profile.volcanoSecretKey || '',
+      openAIKey: profile.openAIKey || ''
     }
   })
 

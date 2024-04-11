@@ -46,7 +46,8 @@ export type ProfileResp = {
   volcanoAccessKeyId?: string
   volcanoSecretKey?: string
   deepLAuthKey?: string
-  defaultTranslation: 'deepL' | 'volcano'
+  openAIKey?: string
+  defaultTranslation: 'deepL' | 'volcano' | 'openAI'
 }
 
 // word
