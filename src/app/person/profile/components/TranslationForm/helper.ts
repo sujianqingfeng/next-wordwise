@@ -2,10 +2,11 @@ import { z } from 'zod'
 
 export const FormSchema = z
   .object({
-    defaultTranslation: z.enum(['deepL', 'volcano']),
+    defaultTranslation: z.enum(['deepL', 'volcano', 'openAI']),
     deepLAuthKey: z.string().optional(),
     volcanoAccessKeyId: z.string().optional(),
-    volcanoSecretKey: z.string().optional()
+    volcanoSecretKey: z.string().optional(),
+    openAIKey: z.string().optional()
   })
   .refine(
     (data) => {
@@ -43,6 +44,18 @@ export const FormSchema = z
       path: ['volcanoSecretKey']
     }
   )
+  .refine(
+    (data) => {
+      if (data.defaultTranslation === 'openAI') {
+        return !!data.openAIKey
+      }
+      return true
+    },
+    {
+      message: 'openAIKey is required',
+      path: ['openAIKey']
+    }
+  )
 
 export type FormValues = z.infer<typeof FormSchema>
 export type Item = {
@@ -57,6 +70,9 @@ export const TranslationProviders = [
   },
   {
     provider: 'volcano'
+  },
+  {
+    provider: 'openAI'
   }
 ]
 
@@ -76,6 +92,12 @@ export function getCurrentProviderForms(provider: Key) {
       {
         name: 'volcanoSecretKey',
         label: 'Volcano Secret Key'
+      }
+    ],
+    openAI: [
+      {
+        name: 'openAIKey',
+        label: 'OpenAI Key'
       }
     ]
   }
