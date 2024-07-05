@@ -15,3 +15,16 @@ export function createSafePromise<R = any, T extends any[] = any[]>(
     }
   }
 }
+
+export function queryStringToObject(queryString: string) {
+  if (queryString.startsWith('?') || queryString.startsWith('#')) {
+    queryString = queryString.slice(1)
+  }
+
+  const params = new URLSearchParams(queryString)
+  const obj: Record<string, string> = {}
+  for (const [key, value] of params) {
+    obj[key] = value
+  }
+  return obj
+}

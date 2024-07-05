@@ -1,31 +1,36 @@
 'use client'
 
-import { fetchAuthApi } from '@/api'
-import { useFetch } from '@/hooks/use-fetch'
+import { queryStringToObject } from '@/utils/basic'
+// import { fetchAuthApi } from '@/api'
+// import { useFetch } from '@/hooks/use-fetch'
 import { useRouter } from 'next/navigation'
+import { useEffect } from 'react'
 
-export default function Page({
-  params,
-  searchParams
+export default function AuthPage({
+  params: { provider }
 }: {
   params: { provider: string }
-  searchParams: { code: string }
 }) {
-  const { provider } = params
-  const { code } = searchParams
   const router = useRouter()
 
-  useFetch({
-    apiFn: fetchAuthApi,
-    defaultQuery: {
-      provider,
-      code
-    },
-    defaultValue: {},
-    successCallback() {
-      router.push('/person/dashboard')
-    }
-  })
+  useEffect(() => {
+    const hash = window.location.hash
+    const params = queryStringToObject(hash)
+    console.log('🚀 ~ useEffect ~ params:', params)
+    const { access_token } = params
+  }, [router])
+
+  // useFetch({
+  //   apiFn: fetchAuthApi,
+  //   defaultQuery: {
+  //     provider,
+  //     code
+  //   },
+  //   defaultValue: {},
+  //   successCallback() {
+  //     router.push('/person/dashboard')
+  //   }
+  // })
 
   return <div>{provider} auth loading...</div>
 }
