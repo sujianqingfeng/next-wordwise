@@ -28,3 +28,9 @@ export function queryStringToObject(queryString: string) {
   }
   return obj
 }
+
+export function objectToQueryString(obj: Record<string, any>) {
+  return Object.keys(obj)
+    .map((key) => `${key}=${obj[key]}`)
+    .join('&')
+}

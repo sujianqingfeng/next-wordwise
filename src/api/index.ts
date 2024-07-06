@@ -18,14 +18,6 @@ import {
   fetchJsonByPut
 } from '@/utils/fetch'
 
-export const fetchAuthProvidersApi = () => {
-  return fetchJsonByGet<AuthProvidersItemResp[]>('/auth/providers')
-}
-
-export const fetchAuthApi = (data: AuthReq) => {
-  return fetchJsonByPost<Token>('/auth', data)
-}
-
 // user
 export const fetchUserApi = (opt?: RequestInit) => {
   return fetchJsonByGet<UserResp>('/user', '', opt)
@@ -61,8 +53,4 @@ export const fetchDeleteWordApi = (word: string) => {
 // import words
 export const fetchImportWordsApi = (form: FormData) => {
   return fetchJsonByPost('/word/import', form)
-}
-
-export const fetchYearCalendarWordApi = (opt?: RequestInit) => {
-  return fetchJsonByGet<WordCalendarResp>('/word/year-calendar', '', opt)
 }
