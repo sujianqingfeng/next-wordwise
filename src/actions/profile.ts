@@ -1,12 +1,14 @@
 'use server'
 
-import { fetchUpdatePwdApi, fetchUpdateTranslationProfileApi } from '@/api'
-import type { ChangePwdFormValues, ProfileResp } from '@/api/types'
+import type { Translator } from '@/api/validations'
+import { serverRequestPut } from '@/utils/request'
 
-export async function updateTranslation(form: ProfileResp) {
-  await fetchUpdateTranslationProfileApi(form)
-}
-
-export async function changePwd(form: ChangePwdFormValues) {
-  await fetchUpdatePwdApi(form)
+export async function fetchUpdateTranslator({
+  translator,
+  ...config
+}: Translator) {
+  return serverRequestPut('/profile/translator', {
+    translator,
+    config
+  })
 }

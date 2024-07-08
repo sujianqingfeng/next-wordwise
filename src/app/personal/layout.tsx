@@ -3,7 +3,7 @@ import { TheHeader } from './components/TheHeader'
 import { TheNav } from './components/TheNav'
 
 const links = ['dashboard', 'words', 'profile'].map((s) => ({
-  href: `/person/${s}`,
+  href: `/personal/${s}`,
   label: s.charAt(0).toUpperCase() + s.slice(1)
 }))
 

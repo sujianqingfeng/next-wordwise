@@ -10,3 +10,11 @@ export const ChangePwdSchema = z
     message: 'Passwords do not match',
     path: ['confirmPassword']
   })
+
+export const DeepLTranslatorSchema = z.object({
+  deepLKey: z.string().min(1),
+  translator: z.enum(['deepL'])
+})
+
+export type DeepLTranslator = z.infer<typeof DeepLTranslatorSchema>
+export type Translator = DeepLTranslator

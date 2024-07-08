@@ -1,28 +1,27 @@
-import { fetchProfileApi } from '@/api'
-import TranslationForm from './components/TranslationForm'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import ChangePwd from './components/ChangePwd'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { DeepLTranslator } from './components/Translators'
 
-export default async function Page() {
-  const profile = await fetchProfileApi()
-
+export default async function ProfilePage() {
   return (
     <>
       <Card>
         <CardHeader>
-          <CardTitle>Translation providers</CardTitle>
+          <CardTitle>Translators</CardTitle>
         </CardHeader>
         <CardContent>
-          <TranslationForm profile={profile}></TranslationForm>
-        </CardContent>
-      </Card>
-
-      <Card className="mt-2">
-        <CardHeader>
-          <CardTitle>Change password</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <ChangePwd />
+          <Tabs defaultValue="deepL">
+            <TabsList>
+              <TabsTrigger value="deepL">deepL</TabsTrigger>
+              <TabsTrigger value="deepSeek">deepSeek</TabsTrigger>
+            </TabsList>
+            <TabsContent value="deepL">
+              <DeepLTranslator />
+            </TabsContent>
+            <TabsContent value="deepSeek">
+              Change your password here.
+            </TabsContent>
+          </Tabs>
         </CardContent>
       </Card>
     </>

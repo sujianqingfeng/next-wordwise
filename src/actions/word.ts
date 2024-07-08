@@ -1,14 +1,23 @@
 'use server'
 
-import { fetchDeleteWordApi, fetchImportWordsApi } from '@/api'
 import { revalidatePath } from 'next/cache'
+import {
+  serverRequestDelete,
+  serverRequestGet,
+  serverRequestPost
+} from '@/utils/request'
+import { BaseResp, WordItemResp } from '@/api/types'
 
 export async function importWords(form: FormData) {
-  await fetchImportWordsApi(form)
-  revalidatePath('/person/words')
+  await serverRequestPost('/word/import', form)
+  revalidatePath('/personal/words')
 }
 
 export async function deleteWords(word: string) {
-  await fetchDeleteWordApi(word)
-  revalidatePath('/person/words')
+  await serverRequestDelete('/word', { word })
+  revalidatePath('/personal/words')
+}
+
+export async function fetchWords() {
+  return serverRequestGet<BaseResp<WordItemResp[]>>('/word/list')
 }

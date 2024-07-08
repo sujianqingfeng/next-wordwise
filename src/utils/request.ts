@@ -2,6 +2,8 @@ import { objectToQueryString } from './basic'
 import { SERVER_HOST } from '../constants'
 import { createSupabaseServerClient } from '@/lib/supabase'
 
+type Method = 'get' | 'post' | 'put' | 'delete'
+
 async function getToken() {
   const { data, error } = await createSupabaseServerClient().auth.getSession()
   if (!error && data.session?.access_token) {
@@ -14,7 +16,7 @@ function createServerRequest({
   method,
   baseUrl = ''
 }: {
-  method: 'get' | 'post' | 'put' | 'delete'
+  method: Method
   baseUrl?: string
 }) {
   return async <R = any>(
@@ -57,7 +59,25 @@ function createServerRequest({
 }
 
 const BASE_URL = '/api'
-export const serverRequestGet = createServerRequest({
-  method: 'get',
-  baseUrl: BASE_URL
-})
+const createCommonRequestOptions = (method: Method) => {
+  return {
+    method,
+    baseUrl: BASE_URL
+  }
+}
+
+export const serverRequestGet = createServerRequest(
+  createCommonRequestOptions('get')
+)
+
+export const serverRequestPut = createServerRequest(
+  createCommonRequestOptions('put')
+)
+
+export const serverRequestDelete = createServerRequest(
+  createCommonRequestOptions('delete')
+)
+
+export const serverRequestPost = createServerRequest(
+  createCommonRequestOptions('post')
+)

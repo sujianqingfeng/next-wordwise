@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
-export default function Home() {
+export default function HomePage() {
   return (
     <main className="">
       <section className="px-2 flex flex-col justify-center items-center h-[400px]">
