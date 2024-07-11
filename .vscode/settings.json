@@ -1,5 +1,5 @@
 {
-  "cSpell.words": ["hookform", "supabase", "tailwindcss", "wordwise"],
+  "cSpell.words": ["hookform", "lucide", "supabase", "tailwindcss", "wordwise"],
   "editor.formatOnSave": true,
   "prettier.enable": true,
   "[typescriptreact]": {

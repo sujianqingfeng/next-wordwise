@@ -1,6 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { DeepLTranslator } from './components/Translators'
+import { DeepSeekEngine } from './components/engines'
 
 export default async function ProfilePage() {
   return (
@@ -12,14 +13,26 @@ export default async function ProfilePage() {
         <CardContent>
           <Tabs defaultValue="deepL">
             <TabsList>
-              <TabsTrigger value="deepL">deepL</TabsTrigger>
-              <TabsTrigger value="deepSeek">deepSeek</TabsTrigger>
+              <TabsTrigger value="deepL">DeepL</TabsTrigger>
             </TabsList>
             <TabsContent value="deepL">
               <DeepLTranslator />
             </TabsContent>
+          </Tabs>
+        </CardContent>
+      </Card>
+
+      <Card>
+        <CardHeader>
+          <CardTitle>Engines</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <Tabs defaultValue="deepSeek">
+            <TabsList>
+              <TabsTrigger value="deepSeek">DeepSeek</TabsTrigger>
+            </TabsList>
             <TabsContent value="deepSeek">
-              Change your password here.
+              <DeepSeekEngine />
             </TabsContent>
           </Tabs>
         </CardContent>

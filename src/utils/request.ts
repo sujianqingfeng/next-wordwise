@@ -42,19 +42,21 @@ function createServerRequest({
     const body =
       method === 'get' || !data ? undefined : new URLSearchParams(data)
 
-    const res = await fetch(`${SERVER_HOST}${url}`, {
+    const options = {
       ...opt,
       method,
       headers,
       body
-    })
+    }
+
+    const res = await fetch(url, options)
 
     if (res.status === 200) {
       const json = await res.json()
       return json.data
     }
 
-    throw new Error('Request failed')
+    throw new Error(res.statusText)
   }
 }
 
@@ -62,7 +64,7 @@ const BASE_URL = '/api'
 const createCommonRequestOptions = (method: Method) => {
   return {
     method,
-    baseUrl: BASE_URL
+    baseUrl: `${SERVER_HOST}${BASE_URL}`
   }
 }
 

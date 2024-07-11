@@ -1,3 +1,5 @@
+'use client'
+
 import {
   Table,
   TableBody,
@@ -12,7 +14,7 @@ import { useEffect, useState } from 'react'
 import { fetchWords } from '@/actions/word'
 import type { WordItemResp } from '@/api/types'
 
-export default async function WordsPage() {
+export default function WordsPage() {
   const [words, setWords] = useState<WordItemResp[]>([])
 
   useEffect(() => {

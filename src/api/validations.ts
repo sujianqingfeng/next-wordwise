@@ -18,3 +18,11 @@ export const DeepLTranslatorSchema = z.object({
 
 export type DeepLTranslator = z.infer<typeof DeepLTranslatorSchema>
 export type Translator = DeepLTranslator
+
+export const DeepSeekEngineSchema = z.object({
+  apiKey: z.string().min(1),
+  engine: z.enum(['deepSeek'])
+})
+
+export type DeepSeekEngine = z.infer<typeof DeepSeekEngineSchema>
+export type Engine = DeepSeekEngine

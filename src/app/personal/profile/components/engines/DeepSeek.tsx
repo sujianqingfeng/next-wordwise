@@ -1,7 +1,7 @@
 'use client'
 
-import { fetchUpdateTranslator } from '@/actions/profile'
-import { type DeepLTranslator, DeepLTranslatorSchema } from '@/api/validations'
+import { fetchUpdateEngine } from '@/actions/profile'
+import { type DeepSeekEngine, DeepSeekEngineSchema } from '@/api/validations'
 import { Button } from '@/components/ui/button'
 import {
   Form,
@@ -14,22 +14,22 @@ import {
 import { Input } from '@/components/ui/input'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
-import { ReloadIcon } from '@radix-ui/react-icons'
+import { RotateCw } from 'lucide-react'
 import { useState } from 'react'
 
-export default function DeepLTranslator() {
+export default function DeepSeekEngine() {
   const [loading, setLoading] = useState(false)
-  const form = useForm<DeepLTranslator>({
-    resolver: zodResolver(DeepLTranslatorSchema),
+  const form = useForm<DeepSeekEngine>({
+    resolver: zodResolver(DeepSeekEngineSchema),
     defaultValues: {
-      deepLKey: '',
-      translator: 'deepL'
+      apiKey: '',
+      engine: 'deepSeek'
     }
   })
 
-  const onSubmit = async (data: DeepLTranslator) => {
+  const onSubmit = async (data: DeepSeekEngine) => {
     setLoading(true)
-    await fetchUpdateTranslator(data)
+    await fetchUpdateEngine(data)
     setLoading(false)
   }
 
@@ -38,20 +38,20 @@ export default function DeepLTranslator() {
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
         <FormField
           control={form.control}
-          name="deepLKey"
+          name="apiKey"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Auth Key</FormLabel>
+              <FormLabel>Api Key</FormLabel>
               <FormControl>
-                <Input placeholder="auth key" {...field} />
+                <Input placeholder="api key" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
         <div className="flex justify-end">
-          <Button type="submit">
-            {loading && <ReloadIcon className="w-4 h-4 mr-2 animate-spin" />}
+          <Button type="submit" disabled={loading}>
+            {loading && <RotateCw size={12} className="mr-2 animate-spin" />}
             Submit
           </Button>
         </div>
