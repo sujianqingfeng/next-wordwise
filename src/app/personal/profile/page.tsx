@@ -22,7 +22,7 @@ export default async function ProfilePage() {
         </CardContent>
       </Card>
 
-      <Card>
+      <Card className="mt-2">
         <CardHeader>
           <CardTitle>Engines</CardTitle>
         </CardHeader>

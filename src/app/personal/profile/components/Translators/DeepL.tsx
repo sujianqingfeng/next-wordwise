@@ -1,7 +1,10 @@
 'use client'
 
-import { fetchUpdateTranslator } from '@/actions/profile'
-import { type DeepLTranslator, DeepLTranslatorSchema } from '@/api/validations'
+import { fetchTranslator, fetchUpdateTranslator } from '@/actions/profile'
+import {
+  type DeepLTranslator,
+  DeepLInsertTranslatorSchema
+} from '@/api/validations'
 import { Button } from '@/components/ui/button'
 import {
   Form,
@@ -15,15 +18,17 @@ import { Input } from '@/components/ui/input'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { ReloadIcon } from '@radix-ui/react-icons'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+
+const translator = 'deepL'
 
 export default function DeepLTranslator() {
   const [loading, setLoading] = useState(false)
   const form = useForm<DeepLTranslator>({
-    resolver: zodResolver(DeepLTranslatorSchema),
+    resolver: zodResolver(DeepLInsertTranslatorSchema),
     defaultValues: {
       deepLKey: '',
-      translator: 'deepL'
+      translator
     }
   })
 
@@ -32,6 +37,14 @@ export default function DeepLTranslator() {
     await fetchUpdateTranslator(data)
     setLoading(false)
   }
+
+  useEffect(() => {
+    fetchTranslator(translator).then((res) => {
+      if (res) {
+        form.setValue('deepLKey', res.config.deepLKey)
+      }
+    })
+  }, [form])
 
   return (
     <Form {...form}>

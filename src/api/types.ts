@@ -50,3 +50,18 @@ export type WordCalendarResp = {
 }
 
 export type ChangePwdFormValues = z.infer<typeof ChangePwdSchema>
+
+type TranslatorDeepLResp = {
+  config: {
+    deepLKey: string
+  }
+}
+
+export type TranslatorResp = null | TranslatorDeepLResp
+
+type EngineDeepSeekResp = {
+  config: {
+    apiKey: string
+  }
+}
+export type EngineResp = null | EngineDeepSeekResp

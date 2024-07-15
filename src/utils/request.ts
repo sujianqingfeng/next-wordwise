@@ -21,7 +21,7 @@ function createServerRequest({
 }) {
   return async <R = any>(
     url: string,
-    data?: Record<string, any>,
+    data?: any,
     opt?: RequestInit
   ): Promise<R> => {
     url = `${baseUrl}${url}`
@@ -31,6 +31,7 @@ function createServerRequest({
     }
 
     const headers: Record<string, any> = {
+      'Content-Type': 'application/json',
       ...opt?.headers
     }
 
@@ -39,8 +40,7 @@ function createServerRequest({
       headers.authorization = `Bearer ${token}`
     }
 
-    const body =
-      method === 'get' || !data ? undefined : new URLSearchParams(data)
+    const body = method === 'get' || !data ? undefined : JSON.stringify(data)
 
     const options = {
       ...opt,

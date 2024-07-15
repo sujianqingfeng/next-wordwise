@@ -1,6 +1,6 @@
 'use client'
 
-import { fetchUpdateEngine } from '@/actions/profile'
+import { fetchEngine, fetchUpdateEngine } from '@/actions/profile'
 import { type DeepSeekEngine, DeepSeekEngineSchema } from '@/api/validations'
 import { Button } from '@/components/ui/button'
 import {
@@ -15,7 +15,9 @@ import { Input } from '@/components/ui/input'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { RotateCw } from 'lucide-react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+
+const engine = 'deepSeek'
 
 export default function DeepSeekEngine() {
   const [loading, setLoading] = useState(false)
@@ -23,7 +25,7 @@ export default function DeepSeekEngine() {
     resolver: zodResolver(DeepSeekEngineSchema),
     defaultValues: {
       apiKey: '',
-      engine: 'deepSeek'
+      engine
     }
   })
 
@@ -32,6 +34,14 @@ export default function DeepSeekEngine() {
     await fetchUpdateEngine(data)
     setLoading(false)
   }
+
+  useEffect(() => {
+    fetchEngine(engine).then((res) => {
+      if (res) {
+        form.setValue('apiKey', res.config.apiKey)
+      }
+    })
+  }, [form])
 
   return (
     <Form {...form}>
