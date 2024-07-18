@@ -12,19 +12,31 @@ import { ImportButton } from './components/ImportButton'
 import DeleteButton from './components/DeleteButton'
 import { useEffect, useState } from 'react'
 import { fetchWords } from '@/actions/word'
-import type { WordItemResp } from '@/api/types'
+import type { PageParams, WordItemResp, WordsResp } from '@/api/types'
+import {
+  Pagination,
+  PaginationContent,
+  PaginationItem,
+  PaginationNext,
+  PaginationPrevious
+} from '@/components/ui/pagination'
 
-export default function WordsPage() {
-  const [words, setWords] = useState<WordItemResp[]>([])
+function WordsPage() {
+  const [words, setWords] = useState<WordsResp>()
+  const [pageParams, setPageParams] = useState<PageParams>({
+    page: 1,
+    pageSize: 10
+  })
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await fetchWords()
-      setWords(data.data)
+      const data = await fetchWords(pageParams)
+      console.log('🚀 ~ fetchData ~ data:', data)
+      setWords(data)
     }
 
     fetchData()
-  }, [])
+  }, [pageParams])
 
   return (
     <div>
@@ -42,7 +54,7 @@ export default function WordsPage() {
         </TableHeader>
 
         <TableBody>
-          {words.map((word) => (
+          {words?.data.map((word) => (
             <TableRow key={word.id}>
               <TableCell>{word.word}</TableCell>
               <TableCell>{word.simpleTranslation}</TableCell>
@@ -53,6 +65,21 @@ export default function WordsPage() {
           ))}
         </TableBody>
       </Table>
+
+      <div>
+        <Pagination>
+          <PaginationContent>
+            <PaginationItem>
+              <PaginationPrevious href="#" />
+            </PaginationItem>
+            <PaginationItem>
+              <PaginationNext href="#" />
+            </PaginationItem>
+          </PaginationContent>
+        </Pagination>
+      </div>
     </div>
   )
 }
+
+export default WordsPage

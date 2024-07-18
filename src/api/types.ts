@@ -1,15 +1,15 @@
 import { z } from 'zod'
 import { ChangePwdSchema } from './validations'
 
-export type PageReq = {
+export type PageParams = {
   page: number
-  size?: number
+  pageSize: number
 }
 
 export type BaseResp<T> = {
   data: T
-  hasNextPage: boolean
-  hasPrevPage: boolean
+  page: number
+  pageSize: number
   total: number
   totalPage: number
 }
@@ -35,13 +35,14 @@ export type ProfileResp = {
 }
 
 // word
-export type WordPageReq = PageReq
+export type WordPageParams = PageParams
 
 export type WordItemResp = {
   id: string
   word: string
   simpleTranslation: string
 }
+export type WordsResp = BaseResp<WordItemResp[]>
 
 export type WordCalendarResp = {
   [key: string]: {

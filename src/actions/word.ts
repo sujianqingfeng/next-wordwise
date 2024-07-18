@@ -6,7 +6,7 @@ import {
   serverRequestGet,
   serverRequestPost
 } from '@/utils/request'
-import { BaseResp, WordItemResp } from '@/api/types'
+import { WordPageParams, WordsResp } from '@/api/types'
 
 export async function importWords(form: FormData) {
   await serverRequestPost('/word/import', form)
@@ -18,6 +18,6 @@ export async function deleteWords(word: string) {
   revalidatePath('/personal/words')
 }
 
-export async function fetchWords() {
-  return serverRequestGet<BaseResp<WordItemResp[]>>('/word/list')
+export async function fetchWords(params: WordPageParams) {
+  return serverRequestGet<WordsResp>('/word/list', params)
 }
