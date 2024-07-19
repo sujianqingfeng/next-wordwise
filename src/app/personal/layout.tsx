@@ -1,4 +1,3 @@
-import Logo from '@/components/Logo'
 import { TheHeader } from './components/TheHeader'
 import { TheNav } from './components/TheNav'
 
@@ -14,10 +13,7 @@ export default function AdminLayout({
 }) {
   return (
     <div className="h-full flex justify-start">
-      <div className="w-[200px] border-r">
-        <header className="h-[100px] flex justify-center items-center">
-          <Logo />
-        </header>
+      <div className="w-[60px] border-r">
         <div className="p-2">
           <TheNav links={links} />
         </div>

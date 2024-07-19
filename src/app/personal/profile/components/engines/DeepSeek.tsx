@@ -16,11 +16,13 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { RotateCw } from 'lucide-react'
 import { useEffect, useState } from 'react'
+import { useToast } from '@/components/ui/use-toast'
 
 const engine = 'deepSeek'
 
 export default function DeepSeekEngine() {
   const [loading, setLoading] = useState(false)
+  const { toast } = useToast()
   const form = useForm<DeepSeekEngine>({
     resolver: zodResolver(DeepSeekEngineSchema),
     defaultValues: {
@@ -33,6 +35,9 @@ export default function DeepSeekEngine() {
     setLoading(true)
     await fetchUpdateEngine(data)
     setLoading(false)
+    toast({
+      title: 'update engine success'
+    })
   }
 
   useEffect(() => {

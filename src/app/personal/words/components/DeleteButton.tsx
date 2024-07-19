@@ -4,7 +4,7 @@ import { deleteWords } from '@/actions/word'
 import { WordItemResp } from '@/api/types'
 import { Button } from '@/components/ui/button'
 import { useToast } from '@/components/ui/use-toast'
-import { TrashIcon } from '@radix-ui/react-icons'
+import { Trash } from 'lucide-react'
 
 interface DeleteButtonProps {
   row: WordItemResp
@@ -22,7 +22,7 @@ export default function DeleteButton(props: DeleteButtonProps) {
 
   return (
     <Button variant="ghost" onClick={onDelete}>
-      <TrashIcon />
+      <Trash></Trash>
     </Button>
   )
 }

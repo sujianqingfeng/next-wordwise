@@ -1,5 +1,3 @@
-'use client'
-
 import {
   Table,
   TableBody,
@@ -10,9 +8,7 @@ import {
 } from '@/components/ui/table'
 import { ImportButton } from './components/ImportButton'
 import DeleteButton from './components/DeleteButton'
-import { useEffect, useState } from 'react'
 import { fetchWords } from '@/actions/word'
-import type { PageParams, WordItemResp, WordsResp } from '@/api/types'
 import {
   Pagination,
   PaginationContent,
@@ -21,22 +17,12 @@ import {
   PaginationPrevious
 } from '@/components/ui/pagination'
 
-function WordsPage() {
-  const [words, setWords] = useState<WordsResp>()
-  const [pageParams, setPageParams] = useState<PageParams>({
-    page: 1,
-    pageSize: 10
-  })
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const data = await fetchWords(pageParams)
-      console.log('🚀 ~ fetchData ~ data:', data)
-      setWords(data)
-    }
-
-    fetchData()
-  }, [pageParams])
+async function WordsPage({
+  searchParams: { page = '1' }
+}: {
+  searchParams: { page?: string }
+}) {
+  const words = await fetchWords({ page: +page, pageSize: 10 })
 
   return (
     <div>
@@ -69,12 +55,19 @@ function WordsPage() {
       <div>
         <Pagination>
           <PaginationContent>
-            <PaginationItem>
-              <PaginationPrevious href="#" />
-            </PaginationItem>
-            <PaginationItem>
-              <PaginationNext href="#" />
-            </PaginationItem>
+            {words.page > 1 && words.totalPage > 1 && (
+              <PaginationItem>
+                <PaginationPrevious
+                  href={`/personal/words?page=${+page - 1}`}
+                />
+              </PaginationItem>
+            )}
+
+            {words.totalPage > 1 && words.page !== words.totalPage && (
+              <PaginationItem>
+                <PaginationNext href={`/personal/words?page=${+page + 1}`} />
+              </PaginationItem>
+            )}
           </PaginationContent>
         </Pagination>
       </div>

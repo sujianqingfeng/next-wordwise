@@ -1,6 +1,6 @@
 'use client'
 
-import { MoonIcon, SunIcon } from '@radix-ui/react-icons'
+import { Moon, Sun } from 'lucide-react'
 import { useTheme } from 'next-themes'
 
 function DarkModeButton() {
@@ -11,11 +11,7 @@ function DarkModeButton() {
 
   return (
     <button onClick={toggleThemeMode}>
-      {theme === 'dark' ? (
-        <SunIcon width={22} height={22} />
-      ) : (
-        <MoonIcon width={22} height={22} />
-      )}
+      {theme === 'dark' ? <Sun size={22} /> : <Moon size={22} />}
     </button>
   )
 }
