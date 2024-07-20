@@ -1,7 +1,6 @@
 import {
   Tooltip,
   TooltipContent,
-  TooltipPortal,
   TooltipProvider,
   TooltipTrigger
 } from '@/components/ui/tooltip'
@@ -77,9 +76,7 @@ export default function CollectCalendar(props: CollectCalendarProps) {
                           ></td>
                         </TooltipTrigger>
 
-                        <TooltipPortal>
-                          <TooltipContent>{getContent(i, j)}</TooltipContent>
-                        </TooltipPortal>
+                        <TooltipContent>{getContent(i, j)}</TooltipContent>
                       </Tooltip>
                     )
                   })}

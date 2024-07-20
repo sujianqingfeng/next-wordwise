@@ -7,13 +7,13 @@ export function useClientRect(elRef: React.RefObject<HTMLElement | null>) {
     return () => {
       setClientRect(elRef.current!.getBoundingClientRect())
     }
-  }, [])
+  }, [elRef])
 
   useLayoutEffect(() => {
     if (elRef.current) {
       updateClientRect()
     }
-  }, [])
+  }, [updateClientRect, elRef])
 
   return [clientRect, updateClientRect] as [
     typeof clientRect,
