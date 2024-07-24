@@ -1,14 +1,14 @@
-import { Baloo_Thambi_2 } from 'next/font/google'
+import { Ms_Madi } from 'next/font/google'
 
-const baloo = Baloo_Thambi_2({ subsets: ['latin'] })
+const msMadi = Ms_Madi({ weight: '400' })
 
 export default function Logo() {
   return (
     <div
-      className={`flex items-center text-[32px] font-bold ${baloo.className}`}
+      className={`flex items-center text-[32px] font-bold ${msMadi.className}`}
     >
-      <span className="text-primary-color">W</span>
-      ordWise
+      <span className="text-pink-400">W</span>
+      ordwise
     </div>
   )
 }

@@ -1,3 +1,5 @@
+import DarkModeButton from '@/components/DarkModeButton'
+
 function Footer() {
   return (
     <footer
@@ -7,12 +9,14 @@ function Footer() {
         text-slate-700 
         dark:text-slate-400 dark:border-slate-700
         flex justify-start items-center
-        px-2
+        px-4
       "
     >
       <div className="max-w-7xl flex-auto mx-auto flex justify-between items-center">
-        <div className="text-xl">Wordwise</div>
-        <div className="text-sm">© Wordwise 2023. All rights reserved</div>
+        <div className="text-xl">
+          <DarkModeButton />
+        </div>
+        <div className="text-sm">© Wordwise 2024. All rights reserved</div>
       </div>
     </footer>
   )
