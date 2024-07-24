@@ -1,6 +1,6 @@
 import { Ms_Madi } from 'next/font/google'
 
-const msMadi = Ms_Madi({ weight: '400' })
+const msMadi = Ms_Madi({ weight: '400', subsets: ['latin'] })
 
 export default function Logo() {
   return (
