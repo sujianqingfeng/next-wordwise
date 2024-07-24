@@ -1,0 +1,17 @@
+.md {
+  padding: 1rem;
+}
+
+.md p {
+  font-size: 1.1em;
+  line-height: 2rem;
+}
+
+.md h2 {
+  line-height: 3rem;
+}
+
+.md li {
+  list-style-type: none;
+  line-height: 2rem;
+}
