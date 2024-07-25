@@ -66,3 +66,6 @@ type EngineDeepSeekResp = {
   }
 }
 export type EngineResp = null | EngineDeepSeekResp
+
+// dashboard
+export type TopQueryResp = { prototype: string; count: number }[]

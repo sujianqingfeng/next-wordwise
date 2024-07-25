@@ -6,7 +6,7 @@ export default async function LoginPage() {
   return (
     <>
       <header className="h-[60px] md:h-[100px] text-slate-700 dark:text-slate-200">
-        <div className="h-full px-2 max-w-7xl mx-auto flex justify-start items-center">
+        <div className="h-full px-4 max-w-7xl mx-auto flex justify-start items-center">
           <Logo />
         </div>
       </header>

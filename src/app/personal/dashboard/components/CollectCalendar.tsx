@@ -1,3 +1,4 @@
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import {
   Tooltip,
   TooltipContent,
@@ -22,7 +23,7 @@ type CollectCalendarProps = {
   data: Record<string, { count: number }>
 }
 
-export default function CollectCalendar(props: CollectCalendarProps) {
+function CollectCalendarContent(props: CollectCalendarProps) {
   const { data = {} } = props
 
   const getCurrentDay = (i: number, j: number) => {
@@ -42,50 +43,58 @@ export default function CollectCalendar(props: CollectCalendarProps) {
   const getBG = (i: number, j: number) => {
     const current = data[formatDay(getCurrentDay(i, j))]
     if (current) {
-      const { count } = current
-      const percent = count * 10
-      if (percent > 100) {
-        return 'bg-primary'
-      }
-      return `bg-primary/${percent}`
+      return 'bg-[var(--primary-active)]'
     }
     return 'bg-slate-300'
   }
 
   return (
-    <div>
-      <TooltipProvider>
-        <table className="border-spacing-1 border-separate">
-          <tbody>
-            {Array.from({ length: ROW }).map((_, i) => {
-              return (
-                <tr className="h-[10px]" key={i}>
-                  {Array.from({ length: COL }).map((_, j) => {
-                    if (isAfter(getCurrentDay(i, j), NOW)) {
-                      return null
-                    }
+    <TooltipProvider>
+      <table className="border-spacing-1 border-separate">
+        <tbody>
+          {Array.from({ length: ROW }).map((_, i) => {
+            return (
+              <tr className="h-[10px]" key={i}>
+                {Array.from({ length: COL }).map((_, j) => {
+                  if (isAfter(getCurrentDay(i, j), NOW)) {
+                    return null
+                  }
 
-                    return (
-                      <Tooltip key={i + j * ROW}>
-                        <TooltipTrigger asChild>
-                          <td
-                            className={cn(
-                              `w-[10px] rounded-sm overflow-hidden`,
-                              getBG(i, j)
-                            )}
-                          ></td>
-                        </TooltipTrigger>
+                  return (
+                    <Tooltip key={i + j * ROW}>
+                      <TooltipTrigger asChild>
+                        <td
+                          className={cn(
+                            `w-[10px] rounded-sm overflow-hidden`,
+                            getBG(i, j)
+                          )}
+                        ></td>
+                      </TooltipTrigger>
 
-                        <TooltipContent>{getContent(i, j)}</TooltipContent>
-                      </Tooltip>
-                    )
-                  })}
-                </tr>
-              )
-            })}
-          </tbody>
-        </table>
-      </TooltipProvider>
-    </div>
+                      <TooltipContent>{getContent(i, j)}</TooltipContent>
+                    </Tooltip>
+                  )
+                })}
+              </tr>
+            )
+          })}
+        </tbody>
+      </table>
+    </TooltipProvider>
   )
 }
+
+function CollectCalendar(props: CollectCalendarProps) {
+  return (
+    <Card>
+      <CardHeader>
+        <CardTitle>Calendar</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <CollectCalendarContent {...props} />
+      </CardContent>
+    </Card>
+  )
+}
+
+export default CollectCalendar

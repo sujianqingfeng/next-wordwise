@@ -3,6 +3,9 @@
 @tailwind utilities;
  
 @layer base {
+
+
+
   :root {
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
@@ -33,6 +36,9 @@
     --ring: 222.2 84% 4.9%;
  
     --radius: 0.5rem;
+
+    --primary-active: hsl(342, 78%, 62%);
+    --chart-label: white;
   }
  
   .dark {
