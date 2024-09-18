@@ -1,4 +1,4 @@
-import type { UserResp } from '@/api/types'
+import type { UserResp } from '~/api/types'
 import Image from 'next/image'
 
 type AvatarProps = {

@@ -1,8 +1,8 @@
 'use client'
 
-import { fetchTranslator, fetchUpdateTranslator } from '@/actions/profile'
-import { type DeepLTranslator, DeepLTranslatorSchema } from '@/api/validations'
-import { Button } from '@/components/ui/button'
+import { fetchTranslator, fetchUpdateTranslator } from '~/actions/profile'
+import { type DeepLTranslator, DeepLTranslatorSchema } from '~/api/validations'
+import { Button } from '~/components/ui/button'
 import {
   Form,
   FormControl,
@@ -10,13 +10,13 @@ import {
   FormItem,
   FormLabel,
   FormMessage
-} from '@/components/ui/form'
-import { Input } from '@/components/ui/input'
+} from '~/components/ui/form'
+import { Input } from '~/components/ui/input'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { useEffect, useState } from 'react'
 import { LoaderCircle } from 'lucide-react'
-import { useToast } from '@/components/ui/use-toast'
+import { useToast } from '~/components/ui/use-toast'
 
 const translator = 'deepL'
 

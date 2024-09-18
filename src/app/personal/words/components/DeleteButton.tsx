@@ -1,9 +1,9 @@
 'use client'
 
-import { deleteWords } from '@/actions/word'
-import { WordItemResp } from '@/api/types'
-import { Button } from '@/components/ui/button'
-import { useToast } from '@/components/ui/use-toast'
+import { deleteWords } from '~/actions/word'
+import { WordItemResp } from '~/api/types'
+import { Button } from '~/components/ui/button'
+import { useToast } from '~/components/ui/use-toast'
 import { Trash } from 'lucide-react'
 
 interface DeleteButtonProps {

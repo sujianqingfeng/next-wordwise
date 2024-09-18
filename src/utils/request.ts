@@ -1,6 +1,6 @@
 import { objectToQueryString } from './basic'
 import { SERVER_HOST } from '../constants'
-import { createSupabaseServerClient } from '@/lib/supabase'
+import { createSupabaseServerClient } from '~/lib/supabase'
 
 type Method = 'get' | 'post' | 'put' | 'delete'
 

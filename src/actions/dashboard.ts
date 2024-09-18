@@ -1,7 +1,7 @@
 'use server'
 
-import type { TopQueryResp, WordCalendarResp } from '@/api/types'
-import { serverRequestGet } from '@/utils/request'
+import type { TopQueryResp, WordCalendarResp } from '~/api/types'
+import { serverRequestGet } from '~/utils/request'
 
 export async function fetchYearCalendarWord() {
   return serverRequestGet<WordCalendarResp>('/dashboard/year-calendar')

@@ -5,8 +5,8 @@ import {
   TooltipContent,
   TooltipProvider,
   TooltipTrigger
-} from '@/components/ui/tooltip'
-import { cn } from '@/lib/utils'
+} from '~/components/ui/tooltip'
+import { cn } from '~/lib/utils'
 import { Bolt, House, TableProperties, type LucideIcon } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'

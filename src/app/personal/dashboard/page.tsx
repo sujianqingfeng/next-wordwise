@@ -1,4 +1,4 @@
-import { fetchYearCalendarWord } from '@/actions/dashboard'
+import { fetchYearCalendarWord } from '~/actions/dashboard'
 import TopQuery from './components/TopQuery'
 import CollectCalendar from './components/CollectCalendar'
 

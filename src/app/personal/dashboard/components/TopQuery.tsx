@@ -1,15 +1,15 @@
 'use client'
 
-import { fetchTopQuery } from '@/actions/dashboard'
-import type { TopQueryResp } from '@/api/types'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { fetchTopQuery } from '~/actions/dashboard'
+import type { TopQueryResp } from '~/api/types'
+import { Card, CardContent, CardHeader, CardTitle } from '~/components/ui/card'
 import {
   ChartConfig,
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent
-} from '@/components/ui/chart'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+} from '~/components/ui/chart'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '~/components/ui/tabs'
 import { useEffect, useState } from 'react'
 import { Bar, BarChart, LabelList, XAxis, YAxis } from 'recharts'
 
@@ -18,7 +18,7 @@ function TopQueryType({ type }: { type: '1' | '2' | '3' }) {
 
   useEffect(() => {
     fetchTopQuery(type).then(setTopQuery)
-  }, [])
+  }, [type])
 
   const chartConfig = {
     count: {

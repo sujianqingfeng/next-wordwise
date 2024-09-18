@@ -5,8 +5,8 @@ import {
   serverRequestDelete,
   serverRequestGet,
   serverRequestPost
-} from '@/utils/request'
-import { WordPageParams, WordsResp } from '@/api/types'
+} from '~/utils/request'
+import { WordPageParams, WordsResp } from '~/api/types'
 
 export async function importWords(form: FormData) {
   await serverRequestPost('/word/import', form)

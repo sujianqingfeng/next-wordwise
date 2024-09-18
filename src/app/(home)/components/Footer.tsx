@@ -1,4 +1,4 @@
-import DarkModeButton from '@/components/DarkModeButton'
+import DarkModeButton from '~/components/DarkModeButton'
 
 function Footer() {
   return (

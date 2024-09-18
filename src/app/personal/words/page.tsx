@@ -5,17 +5,17 @@ import {
   TableHeader,
   TableRow,
   TableHead
-} from '@/components/ui/table'
+} from '~/components/ui/table'
 import { ImportButton } from './components/ImportButton'
 import DeleteButton from './components/DeleteButton'
-import { fetchWords } from '@/actions/word'
+import { fetchWords } from '~/actions/word'
 import {
   Pagination,
   PaginationContent,
   PaginationItem,
   PaginationNext,
   PaginationPrevious
-} from '@/components/ui/pagination'
+} from '~/components/ui/pagination'
 
 async function WordsPage({
   searchParams: { page = '1' }

@@ -1,8 +1,8 @@
 'use server'
 
-import { EngineResp, TranslatorResp } from '@/api/types'
-import type { Engine, Translator } from '@/api/validations'
-import { serverRequestGet, serverRequestPut } from '@/utils/request'
+import { EngineResp, TranslatorResp } from '~/api/types'
+import type { Engine, Translator } from '~/api/validations'
+import { serverRequestGet, serverRequestPut } from '~/utils/request'
 
 export async function fetchUpdateTranslator({
   translator,

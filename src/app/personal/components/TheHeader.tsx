@@ -1,9 +1,9 @@
 'use client'
 
-import { fetchUser } from '@/actions/user'
-import type { UserResp } from '@/api/types'
-import DarkModeButton from '@/components/DarkModeButton'
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import { fetchUser } from '~/actions/user'
+import type { UserResp } from '~/api/types'
+import DarkModeButton from '~/components/DarkModeButton'
+import { Avatar, AvatarFallback, AvatarImage } from '~/components/ui/avatar'
 import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
 

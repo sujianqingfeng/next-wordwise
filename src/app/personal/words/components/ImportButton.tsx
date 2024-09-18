@@ -1,8 +1,8 @@
 'use client'
 
-import { importWords } from '@/actions/word'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
+import { importWords } from '~/actions/word'
+import { Button } from '~/components/ui/button'
+import { Input } from '~/components/ui/input'
 import { useRef } from 'react'
 
 export function ImportButton() {
