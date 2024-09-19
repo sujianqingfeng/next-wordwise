@@ -1,6 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from '~/components/ui/card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '~/components/ui/tabs'
-import { DeepLTranslator } from './components/Translators'
+import { DeepLTranslator,DeepLXTranslator } from './components/Translators'
 import { DeepSeekEngine } from './components/engines'
 
 export default async function ProfilePage() {
@@ -14,9 +14,13 @@ export default async function ProfilePage() {
           <Tabs defaultValue="deepL">
             <TabsList>
               <TabsTrigger value="deepL">DeepL</TabsTrigger>
+              <TabsTrigger value="deepLX">DeepLX</TabsTrigger>
             </TabsList>
             <TabsContent value="deepL">
               <DeepLTranslator />
+            </TabsContent>
+            <TabsContent value="deepLX">
+              <DeepLXTranslator />
             </TabsContent>
           </Tabs>
         </CardContent>

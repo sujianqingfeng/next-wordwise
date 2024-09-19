@@ -1,3 +1,4 @@
 import DeepLTranslator from './DeepL'
+import DeepLXTranslator from './DeepLX'
 
-export { DeepLTranslator }
+export { DeepLTranslator,DeepLXTranslator }

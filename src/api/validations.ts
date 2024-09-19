@@ -13,7 +13,7 @@ export const ChangePwdSchema = z
 
 export const DeepLTranslatorSchema = z.object({
   deepLKey: z.string().min(1),
-  translator: z.enum(['deepL'])
+  translator: z.enum(['deepL','deepLX'])
 })
 
 export type DeepLTranslator = z.infer<typeof DeepLTranslatorSchema>
