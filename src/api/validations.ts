@@ -24,5 +24,11 @@ export const DeepSeekEngineSchema = z.object({
   engine: z.enum(['deepSeek'])
 })
 
+export const OpenAIEngineSchema = z.object({
+  apiKey: z.string().min(1),
+  engine: z.enum(['openai'])
+})
+
 export type DeepSeekEngine = z.infer<typeof DeepSeekEngineSchema>
-export type Engine = DeepSeekEngine
+export type OpenAIEngine = z.infer<typeof OpenAIEngineSchema>
+export type Engine = DeepSeekEngine | OpenAIEngine
